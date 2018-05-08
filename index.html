@@ -11,6 +11,7 @@
     <link href="publico/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>    
+    <script src="publico/libs/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -54,8 +55,10 @@
             }
             
             document.body.appendChild(scriptJS);
+            $('.date').mask('00/00/0000');
 
         };
+
     </script>    
 </body>
 

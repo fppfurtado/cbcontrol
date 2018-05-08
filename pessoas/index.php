@@ -1,6 +1,7 @@
 <?php
 
 include "../modelo/PessoaDAO.php";
+include "../utilidades/funcoes.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb['db'], $configDb['usuario'], $configDb['senha']);
@@ -17,6 +18,12 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "ultimo_nome" => $_GET['ultimo_nome']
             )
         );
+
+        foreach($resultado as $pessoa) {
+            $pessoa->data_nascimento = formatarData($pessoa->data_nascimento);
+            $pessoa->data_batismo = formatarData($pessoa->data_batismo);
+        }
+
         break;
 
     case "POST":
