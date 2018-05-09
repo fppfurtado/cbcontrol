@@ -17,7 +17,23 @@ $(function(){
                     width: 50, 
                     filtering: false,
                     itemTemplate: function(value, item) {
-                        return '<span class="date">' + value + '</span>';
+                        return $("<span>")
+                        .html(value)
+                        .addClass('date')
+                        .mask('00/00/0000');
+                    },
+                    insertTemplate: function() {
+                        return jsGrid.fields.text.prototype.insertTemplate
+                        .call(this)
+                        .addClass('date')
+                        .mask('00/00/0000');
+                    },
+                    editTemplate: function(value, item) {
+                        return jsGrid.fields.text.prototype.editTemplate
+                        .call(this)
+                        .val(value)
+                        .addClass('date')
+                        .mask('00/00/0000');
                     }
                 },
                 { 
@@ -27,7 +43,23 @@ $(function(){
                     width: 50, 
                     filtering: false ,
                     itemTemplate: function(value, item) {
-                        return '<span class="date">' + value + '</span>';
+                        return $("<span>")
+                        .html(value)
+                        .addClass('date')
+                        .mask('00/00/0000');
+                    },
+                    insertTemplate: function() {
+                        return jsGrid.fields.text.prototype.insertTemplate
+                        .call(this)
+                        .addClass('date')
+                        .mask('00/00/0000');
+                    },
+                    editTemplate: function(value, item) {
+                        return jsGrid.fields.text.prototype.editTemplate
+                        .call(this)
+                        .val(value)
+                        .addClass('date')
+                        .mask('00/00/0000');
                     }
                 },
                 { 
@@ -37,7 +69,23 @@ $(function(){
                     width: 50, 
                     filtering: false,
                     itemTemplate: function(value, item) {
-                        return '<span class="cel">' + value + '</span>';
+                        return $("<span>")
+                        .html(value)
+                        .addClass('cel')
+                        .mask('(00) 00000-0000');
+                    },
+                    insertTemplate: function() {
+                        return jsGrid.fields.text.prototype.insertTemplate
+                        .call(this)
+                        .addClass('cel')
+                        .mask('(00) 00000-0000');
+                    },
+                    editTemplate: function(value, item) {
+                        return jsGrid.fields.text.prototype.editTemplate
+                        .call(this)
+                        .val(value)
+                        .addClass('cel')
+                        .mask('(00) 00000-0000');
                     }
                 },
                 { type: "text", name: "email", title: "Email", width: 100, filtering: false },
@@ -104,12 +152,7 @@ $(function(){
                         data: item
                     });
                 }
-            },
-
-            onDataLoaded: function() {
-                $('.date').mask('00/00/0000');
-                $('.cel').mask('(00) 00000-0000')
-            },
+            }            
         
         });        
 
