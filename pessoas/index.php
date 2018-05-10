@@ -36,7 +36,7 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "telefone" => $_POST['telefone'],
                 "email" => $_POST['email'],
                 "e_professor" => $_POST['e_professor'] === "true" ? 1 : 0,
-                "discipulador" => !empty($_POST['discipulador']) ? intval($_POST['discipulador']) : 'NULL'
+                "discipulador" => !empty($_POST['discipulador']) ? intval($_POST['discipulador']) : null
             )
         );
         break;

@@ -112,6 +112,22 @@ $(function(){
 
             onItemInserting: function(args) {
 
+                //console.log("onItemInserting");
+
+                var dtaNasc = args.item.data_nascimento.split("/");
+                var dtaBat = args.item.data_batismo.split("/");
+                var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
+
+                args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
+                args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
+                args.item.telefone = tel;
+
+            },
+
+            onItemUpdating: function(args) {
+
+                //console.log("onItemUpdating");
+
                 var dtaNasc = args.item.data_nascimento.split("/");
                 var dtaBat = args.item.data_batismo.split("/");
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
