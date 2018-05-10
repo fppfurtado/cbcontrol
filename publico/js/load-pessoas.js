@@ -5,6 +5,8 @@ $(function(){
         url: "pessoas/?primeiro_nome=&ultimo_nome="
     }).done(function(discipuladores) {
 
+        discipuladores.unshift("");
+
         $("#jsGrid").jsGrid({
 
             fields:[
@@ -107,6 +109,18 @@ $(function(){
                 },
                 { type: "control"}
             ],
+
+            onItemInserting: function(args) {
+
+                var dtaNasc = args.item.data_nascimento.split("/");
+                var dtaBat = args.item.data_batismo.split("/");
+                var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
+
+                args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
+                args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
+                args.item.telefone = tel;
+
+            },
         
             width: "100%",
             height: "100%",

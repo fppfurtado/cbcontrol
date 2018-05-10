@@ -74,10 +74,12 @@ Class PessoaDAO implements iDAO {
     }
 
     public function insert($data) {
+
         $sql = "INSERT INTO marco_pessoa 
         (primeiro_nome, ultimo_nome, data_nascimento, data_batismo, telefone, email, e_professor, discipulador) 
         VALUES 
         (:pnome, :unome, :dtaNasc, :dtaBatismo, :tel, :email, :eProf, :discipulador)";
+
         $q = $this->db->prepare($sql);
         $q->bindParam(":pnome", $data["primeiro_nome"]);
         $q->bindParam(":unome", $data["ultimo_nome"]);
@@ -87,8 +89,10 @@ Class PessoaDAO implements iDAO {
         $q->bindParam(":email", $data["email"]);
         $q->bindParam(":eProf", $data["e_professor"], PDO::PARAM_INT);
         $q->bindParam(":discipulador", $data["discipulador"], PDO::PARAM_INT);
-        $q->execute();
+        echo $q->execute();
+
         return $this->getById($this->db->lastInsertId());
+
     }
 
     public function update($data) {
