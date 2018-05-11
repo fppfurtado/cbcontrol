@@ -19,18 +19,21 @@ $(function(){
                     width: 50, 
                     filtering: false,
                     itemTemplate: function(value, item) {
+                        //console.log('data_nascimento:itemTemplate => ' + value);
                         return $("<span>")
                         .html(value)
                         .addClass('date')
                         .mask('00/00/0000');
                     },
                     insertTemplate: function() {
+                        //console.log('data_nascimento:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
                         .call(this)
                         .addClass('date')
                         .mask('00/00/0000');
                     },
                     editTemplate: function(value, item) {
+                        //console.log('data_nascimento:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
                         .call(this)
                         .val(value)
@@ -45,18 +48,21 @@ $(function(){
                     width: 50, 
                     filtering: false ,
                     itemTemplate: function(value, item) {
+                        //console.log('data_batismo:itemTemplate => ' + value);
                         return $("<span>")
                         .html(value)
                         .addClass('date')
                         .mask('00/00/0000');
                     },
                     insertTemplate: function() {
+                        //console.log('data_batismo:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
                         .call(this)
                         .addClass('date')
                         .mask('00/00/0000');
                     },
                     editTemplate: function(value, item) {
+                        //console.log('data_batismo:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
                         .call(this)
                         .val(value)
@@ -71,18 +77,21 @@ $(function(){
                     width: 50, 
                     filtering: false,
                     itemTemplate: function(value, item) {
+                        //console.log('telefone:itemTemplate => ' + value);
                         return $("<span>")
                         .html(value)
                         .addClass('cel')
                         .mask('(00) 00000-0000');
                     },
                     insertTemplate: function() {
+                        //console.log('telefone:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
                         .call(this)
                         .addClass('cel')
                         .mask('(00) 00000-0000');
                     },
                     editTemplate: function(value, item) {
+                        //console.log('telefone:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
                         .call(this)
                         .val(value)
@@ -112,7 +121,7 @@ $(function(){
 
             onItemInserting: function(args) {
 
-                //console.log("onItemInserting");
+                console.log("onItemInserting");
 
                 var dtaNasc = args.item.data_nascimento.split("/");
                 var dtaBat = args.item.data_batismo.split("/");
@@ -121,6 +130,19 @@ $(function(){
                 args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
                 args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
                 args.item.telefone = tel;
+
+            },
+
+            onItemInserted: function(args) {
+                console.log("onItemInserted");
+
+                var dtaNasc = args.item.data_nascimento.split("-");
+                var dtaBat = args.item.data_batismo.split("-");
+                //var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
+
+                args.item.data_nascimento = dtaNasc[2] + dtaNasc[1] + dtaNasc[0];
+                args.item.data_batismo = dtaBat[2] + dtaBat[1] + dtaBat[0];
+                //args.item.telefone = tel;
 
             },
 
@@ -137,9 +159,9 @@ $(function(){
                 args.item.telefone = tel;
 
             },
-        
+
             width: "100%",
-            height: "100%",
+            height: "auto",
         
             filtering: true,
             sorting: true,
@@ -159,6 +181,17 @@ $(function(){
                         type: "GET",
                         url: "pessoas/",
                         data: filter
+                    }).done(function(dados) {
+                        
+                        for(var i = 0; i < dados.length; i++) {
+
+                            dtaNasc = dados[i].data_nascimento.split("-");
+                            dtaBat = dados[i].data_batismo.split("-");
+                        
+                            dados[i].data_nascimento = dtaNasc[2] + dtaNasc[1] + dtaNasc[0];
+                            dados[i].data_batismo = dtaBat[2] + dtaBat[1] + dtaBat[0];
+                        
+                        }
                     });
                 },
                 insertItem: function(item) {

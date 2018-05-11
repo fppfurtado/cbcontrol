@@ -1,7 +1,6 @@
 <?php
 
 include "../modelo/PessoaDAO.php";
-include "../utilidades/funcoes.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb['db'], $configDb['usuario'], $configDb['senha']);
@@ -18,12 +17,6 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "ultimo_nome" => $_GET['ultimo_nome']
             )
         );
-
-        foreach($resultado as $pessoa) {
-            $pessoa->data_nascimento = formatarData($pessoa->data_nascimento);
-            $pessoa->data_batismo = formatarData($pessoa->data_batismo);
-        }
-
         break;
 
     case "POST":
@@ -54,7 +47,7 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "telefone" => $_PUT['telefone'],
                 "email" => $_PUT['email'],
                 "e_professor" => $_PUT['e_professor'] === "true" ? 1 : 0,
-                "discipulador" => intval($_PUT['discipulador'])
+                "discipulador" => !empty($_POST['discipulador']) ? intval($_POST['discipulador']) : null
             )
         );
         break;
