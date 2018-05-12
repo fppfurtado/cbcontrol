@@ -1,20 +1,36 @@
+// Inicia quando o DOM estiver pronto
 $(function(){
 
+    /* 
+    Faz uma requisição ao servidor para recuperar 
+    um array de objetos contendo informações das pessoas
+    cadastradas    
+    */ 
     $.ajax({
         type: "GET",
         url: "pessoas/?primeiro_nome=&ultimo_nome="
     }).done(function(pessoas) {
 
+        /* 
+        Array que irá armazenar objetos contendo informações
+        das pessoas cadastradas, porém apenas com as informações
+        'id' e 'nome' (concatenação de primeiro_nome e ultimo_nome)
+        */
         var discipuladores = [];
 
+        // percorrendo o array de pessoas para popular o array 'discipuladores'
         for(var i = 0; i < pessoas.length; i++) {
+            // concatenando primeiro_nome e ultimo_nome
             discipuladores.push({id: pessoas[i].id, nome: pessoas[i].primeiro_nome + ' ' + pessoas[i].ultimo_nome});
         }
         
+        // inserindo um objeto vazio na primeira posição do array
         discipuladores.unshift("");
         
+        // Carregando o plugin JSGrid
         $("#jsGrid").jsGrid({
 
+            // Propriedade que contém um vetor com objetos que representam os campos da tabela
             fields:[
                 { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true },
                 { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true },
@@ -24,6 +40,7 @@ $(function(){
                     title: "Data de Nascimento", 
                     width: 50, 
                     filtering: false,
+                    // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         //console.log('data_nascimento:itemTemplate => ' + value);
                         return $("<span>")
@@ -31,6 +48,7 @@ $(function(){
                         .addClass('date')
                         .mask('00/00/0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de inserção
                     insertTemplate: function() {
                         //console.log('data_nascimento:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
@@ -38,6 +56,7 @@ $(function(){
                         .addClass('date')
                         .mask('00/00/0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de edição
                     editTemplate: function(value, item) {
                         //console.log('data_nascimento:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
@@ -53,6 +72,7 @@ $(function(){
                     title: "Data de Batismo", 
                     width: 50, 
                     filtering: false ,
+                    // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         //console.log('data_batismo:itemTemplate => ' + value);
                         return $("<span>")
@@ -60,6 +80,7 @@ $(function(){
                         .addClass('date')
                         .mask('00/00/0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de inserção
                     insertTemplate: function() {
                         //console.log('data_batismo:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
@@ -67,6 +88,7 @@ $(function(){
                         .addClass('date')
                         .mask('00/00/0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de edição
                     editTemplate: function(value, item) {
                         //console.log('data_batismo:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
@@ -82,6 +104,7 @@ $(function(){
                     title: "Telefone", 
                     width: 50, 
                     filtering: false,
+                    // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         //console.log('telefone:itemTemplate => ' + value);
                         return $("<span>")
@@ -89,6 +112,7 @@ $(function(){
                         .addClass('cel')
                         .mask('(00) 00000-0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de inserção
                     insertTemplate: function() {
                         //console.log('telefone:insertTemplate');
                         return jsGrid.fields.text.prototype.insertTemplate
@@ -96,6 +120,7 @@ $(function(){
                         .addClass('cel')
                         .mask('(00) 00000-0000');
                     },
+                    // propriedade que define o coteúdo da célula em modo de edição
                     editTemplate: function(value, item) {
                         //console.log('telefone:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
@@ -115,6 +140,7 @@ $(function(){
                     items: discipuladores, 
                     valueField: "id", 
                     textField: "nome",
+                    // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         if(typeof value == 'string'){
                             var discipulador = pessoas.find(e => e.id == value);
@@ -125,6 +151,7 @@ $(function(){
                 { type: "control"}
             ],
 
+            // propriedade que armazena a função que irá executar antes de um item ser inserido na tabela
             onItemInserting: function(args) {
 
                 //console.log("onItemInserting");
@@ -139,9 +166,10 @@ $(function(){
 
             },
 
+            // propriedade que armazena a função que irá executar após um item ser inserido na tabela
             onItemInserted: function(args) {
                 
-//                console.log("onItemInserted");
+                //console.log("onItemInserted");
 
                 var dtaNasc = args.item.data_nascimento.split("-");
                 var dtaBat = args.item.data_batismo.split("-");
@@ -153,6 +181,7 @@ $(function(){
 
             },
 
+            // propriedade que armazena a função que irá executar antes de um item ser atualizado na tabela
             onItemUpdating: function(args) {
 
                 //console.log("onItemUpdating");
@@ -182,25 +211,31 @@ $(function(){
             deleteConfirm: "Confirmar deletar?",
         
             autoload: true,            
+            // propriedade que armazena o objeto controlador do comportamento da tabela
             controller: {
+                // Requisição do tipo GET ao servidor, retornando as pessoas cadastradas.
                 loadData: function(filter){
                     return $.ajax({
                         type: "GET",
                         url: "pessoas/",
                         data: filter
+                        // Ao retornar a resposta da requisição, trata os campos do tipo data 'yyyy-mm-dd'.
                     }).done(function(dados) {
                         
                         for(var i = 0; i < dados.length; i++) {
 
+                            // Quebra as strings de data usando o delimitador '-'
                             dtaNasc = dados[i].data_nascimento.split("-");
                             dtaBat = dados[i].data_batismo.split("-");
                         
+                            // Concatena os componentes de data no formato 'ddmmyyyy'
                             dados[i].data_nascimento = dtaNasc[2] + dtaNasc[1] + dtaNasc[0];
                             dados[i].data_batismo = dtaBat[2] + dtaBat[1] + dtaBat[0];
                         
                         }
                     });
                 },
+                // Requisição do tipo POST ao servidor, inserindo a pessoas contida no objeto 'item'.
                 insertItem: function(item) {
                     return $.ajax({
                         type: "POST",
@@ -208,6 +243,7 @@ $(function(){
                         data: item
                     });
                 },
+                // Requisição do tipo PUT ao servidor, atualizando informações da pessoa contida no objeto 'item'.
                 updateItem: function(item) {
                     return $.ajax({
                         type: "PUT",
@@ -215,6 +251,7 @@ $(function(){
                         data: item
                     });
                 },
+                // Requisição do tipo DELETE ao servidor, removendo a pessoas contida no objeto 'item'.
                 deleteItem: function(item) {
                     return $.ajax({
                         type: "DELETE",
