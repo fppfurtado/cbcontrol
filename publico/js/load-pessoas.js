@@ -3,10 +3,16 @@ $(function(){
     $.ajax({
         type: "GET",
         url: "pessoas/?primeiro_nome=&ultimo_nome="
-    }).done(function(discipuladores) {
+    }).done(function(pessoas) {
 
+        var discipuladores = [];
+
+        for(var i = 0; i < pessoas.length; i++) {
+            discipuladores.push({id: pessoas[i].id, nome: pessoas[i].primeiro_nome + ' ' + pessoas[i].ultimo_nome});
+        }
+        
         discipuladores.unshift("");
-
+        
         $("#jsGrid").jsGrid({
 
             fields:[
@@ -108,10 +114,10 @@ $(function(){
                     width: 100,
                     items: discipuladores, 
                     valueField: "id", 
-                    textField: "primeiro_nome",
+                    textField: "nome",
                     itemTemplate: function(value, item) {
                         if(typeof value == 'string'){
-                            var discipulador = discipuladores.find(e => e.id == value);
+                            var discipulador = pessoas.find(e => e.id == value);
                             return discipulador.primeiro_nome + ' ' + discipulador.ultimo_nome;
                         }
                     }
@@ -121,7 +127,7 @@ $(function(){
 
             onItemInserting: function(args) {
 
-                console.log("onItemInserting");
+                //console.log("onItemInserting");
 
                 var dtaNasc = args.item.data_nascimento.split("/");
                 var dtaBat = args.item.data_batismo.split("/");
@@ -134,7 +140,8 @@ $(function(){
             },
 
             onItemInserted: function(args) {
-                console.log("onItemInserted");
+                
+//                console.log("onItemInserted");
 
                 var dtaNasc = args.item.data_nascimento.split("-");
                 var dtaBat = args.item.data_batismo.split("-");
