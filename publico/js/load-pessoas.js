@@ -21,7 +21,10 @@ $(function(){
         // percorrendo o array de pessoas para popular o array 'discipuladores'
         for(var i = 0; i < pessoas.length; i++) {
             // concatenando primeiro_nome e ultimo_nome
-            discipuladores.push({id: pessoas[i].id, nome: pessoas[i].primeiro_nome + ' ' + pessoas[i].ultimo_nome});
+            discipuladores.push({
+                id: pessoas[i].id,
+                nome: pessoas[i].primeiro_nome + ' ' + pessoas[i].ultimo_nome
+            });
         }
         
         // inserindo um objeto vazio na primeira posição do array
@@ -39,7 +42,7 @@ $(function(){
                     name: "data_nascimento", 
                     title: "Data de Nascimento", 
                     width: 50, 
-                    filtering: false,
+                    filtering: true,
                     // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         //console.log('data_nascimento:itemTemplate => ' + value);
@@ -64,6 +67,12 @@ $(function(){
                         .val(value)
                         .addClass('date')
                         .mask('00/00/0000');
+                    },
+                    filterTemplate: function() {
+                        return jsGrid.fields.text.prototype.filterTemplate
+                        .call(this)
+                        .addClass('date')
+                        .mask('00/00/0000');
                     }
                 },
                 { 
@@ -71,7 +80,7 @@ $(function(){
                     name: "data_batismo", 
                     title: "Data de Batismo", 
                     width: 50, 
-                    filtering: false ,
+                    filtering: true,
                     // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
                         //console.log('data_batismo:itemTemplate => ' + value);
@@ -170,14 +179,9 @@ $(function(){
             onItemInserted: function(args) {
                 
                 //console.log("onItemInserted");
-
-                var dtaNasc = args.item.data_nascimento.split("-");
-                var dtaBat = args.item.data_batismo.split("-");
-                //var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
-
-                args.item.data_nascimento = dtaNasc[2] + dtaNasc[1] + dtaNasc[0];
-                args.item.data_batismo = dtaBat[2] + dtaBat[1] + dtaBat[0];
-                //args.item.telefone = tel;
+                
+                args.item.data_nascimento = tratarDataMysql(args.item.data_nascimento);
+                args.item.data_batismo = tratarDataMysql(args.item.data_batismo);
 
             },
 
@@ -224,13 +228,8 @@ $(function(){
                         
                         for(var i = 0; i < dados.length; i++) {
 
-                            // Quebra as strings de data usando o delimitador '-'
-                            dtaNasc = dados[i].data_nascimento.split("-");
-                            dtaBat = dados[i].data_batismo.split("-");
-                        
-                            // Concatena os componentes de data no formato 'ddmmyyyy'
-                            dados[i].data_nascimento = dtaNasc[2] + dtaNasc[1] + dtaNasc[0];
-                            dados[i].data_batismo = dtaBat[2] + dtaBat[1] + dtaBat[0];
+                            dados[i].data_nascimento = tratarDataMysql(dados[i].data_nascimento);
+                            dados[i].data_batismo = tratarDataMysql(dados[i].data_batismo);
                         
                         }
                     });
@@ -266,3 +265,14 @@ $(function(){
     });
 
 })
+
+function tratarDataMysql(data) {
+
+    // Quebra as strings de data usando o delimitador '-'
+    data = data.split('-');
+    // Concatena os componentes de data no formato 'ddmmyyyy'
+    data = data[2] + data[1] + data[0];
+    console.log(data);
+    return data;
+
+}
