@@ -272,7 +272,7 @@ function tratarDataMysql(data) {
     data = data.split('-');
     // Concatena os componentes de data no formato 'ddmmyyyy'
     data = data[2] + data[1] + data[0];
-    console.log(data);
+    
     return data;
 
 }
