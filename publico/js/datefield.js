@@ -21,7 +21,9 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     itemTemplate: function (value) {
-        console.log(value);
+        
+        if(value[0] === '0') return '00/00/0000';
+
         var data, dia, mes, ano;
 
         data = new Date(value);       
@@ -30,6 +32,7 @@ MyDateField.prototype = new jsGrid.Field({
         ano = data.getFullYear();
 
         return dia + '/' + mes + '/' + ano;
+
     },
 
     insertTemplate: function (value) {

@@ -37,45 +37,13 @@ $(function(){
             fields:[
                 { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true },
                 { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true },
+                { type: "date", name: "data_nascimento", title: "Data de Nascimento", width: 50, filtering: true },
                 { 
                     type: "date", 
-                    name: "data_nascimento", 
-                    title: "Data de Nascimento", 
-                    width: 50, 
-                    filtering: true,
-                    
-                },
-                { 
-                    type: "text", 
                     name: "data_batismo", 
                     title: "Data de Batismo", 
                     width: 50, 
-                    filtering: true,
-                    // propriedade que define o coteúdo da célula em modo de exibição
-                    itemTemplate: function(value, item) {
-                        //console.log('data_batismo:itemTemplate => ' + value);
-                        return $("<span>")
-                        .html(value)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    },
-                    // propriedade que define o coteúdo da célula em modo de inserção
-                    insertTemplate: function() {
-                        //console.log('data_batismo:insertTemplate');
-                        return jsGrid.fields.text.prototype.insertTemplate
-                        .call(this)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    },
-                    // propriedade que define o coteúdo da célula em modo de edição
-                    editTemplate: function(value, item) {
-                        //console.log('data_batismo:editTemplate => ' + value);
-                        return jsGrid.fields.text.prototype.editTemplate
-                        .call(this)
-                        .val(value)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    }
+                    filtering: true
                 },
                 { 
                     type: "text", 
