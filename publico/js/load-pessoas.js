@@ -193,15 +193,6 @@ $(function(){
                         type: "GET",
                         url: "pessoas/",
                         data: filter
-                        // Ao retornar a resposta da requisição, trata os campos do tipo data 'yyyy-mm-dd'.
-                    }).done(function(dados) {
-                        
-                        for(var i = 0; i < dados.length; i++) {
-
-                           // dados[i].data_nascimento = tratarDataMysql(dados[i].data_nascimento);
-                           // dados[i].data_batismo = tratarDataMysql(dados[i].data_batismo);
-                        
-                        }
                     });
                 },
                 // Requisição do tipo POST ao servidor, inserindo a pessoas contida no objeto 'item'.
