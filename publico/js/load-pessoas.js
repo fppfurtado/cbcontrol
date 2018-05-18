@@ -38,42 +38,12 @@ $(function(){
                 { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true },
                 { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true },
                 { 
-                    type: "text", 
+                    type: "date", 
                     name: "data_nascimento", 
                     title: "Data de Nascimento", 
                     width: 50, 
                     filtering: true,
-                    // propriedade que define o coteúdo da célula em modo de exibição
-                    itemTemplate: function(value, item) {
-                        //console.log('data_nascimento:itemTemplate => ' + value);
-                        return $("<span>")
-                        .html(value)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    },
-                    // propriedade que define o coteúdo da célula em modo de inserção
-                    insertTemplate: function() {
-                        //console.log('data_nascimento:insertTemplate');
-                        return jsGrid.fields.text.prototype.insertTemplate
-                        .call(this)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    },
-                    // propriedade que define o coteúdo da célula em modo de edição
-                    editTemplate: function(value, item) {
-                        //console.log('data_nascimento:editTemplate => ' + value);
-                        return jsGrid.fields.text.prototype.editTemplate
-                        .call(this)
-                        .val(value)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    },
-                    filterTemplate: function() {
-                        return jsGrid.fields.text.prototype.filterTemplate
-                        .call(this)
-                        .addClass('date')
-                        .mask('00/00/0000');
-                    }
+                    
                 },
                 { 
                     type: "text", 
@@ -228,8 +198,8 @@ $(function(){
                         
                         for(var i = 0; i < dados.length; i++) {
 
-                            dados[i].data_nascimento = tratarDataMysql(dados[i].data_nascimento);
-                            dados[i].data_batismo = tratarDataMysql(dados[i].data_batismo);
+                           // dados[i].data_nascimento = tratarDataMysql(dados[i].data_nascimento);
+                           // dados[i].data_batismo = tratarDataMysql(dados[i].data_batismo);
                         
                         }
                     });
