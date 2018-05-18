@@ -22,13 +22,13 @@ MyDateField.prototype = new jsGrid.Field({
 
     itemTemplate: function (value) {
 
-        if (value[0] === '0') return '00/00/0000';
+        if (!value || value[0] === '0') return;
 
         var data, dia, mes, ano;
 
         data = new Date(value);
         // Ajustando data ao Fuso Horário do sistema
-        data.setTime( data.getTime() + data.getTimezoneOffset()*60*1000 );
+        data.setTime(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
 
         dia = data.getDate() < 10 ? '0' + data.getDate() : data.getDate();
         mes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
@@ -54,22 +54,15 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     insertValue: function () {
-        return this._insertPicker.datepicker("getDate").toISOString();
+        var data = this._insertPicker.datepicker("getDate");
+        return converterDateParaMysql(data);
     },
 
     editValue: function () {
-        console.log('editValue');
-        var data, dia, mes, ano;
-        
-        data = this._editPicker.datepicker("getDate");        
-        console.log(data.toDateString());
-        data.setTime( data.getTime() + data.getTimezoneOffset()*60*1000 );
-        console.log(data.toDateString());
-        dia = data.getDate();
-        mes = data.getMonth() < 0 ? '0' + (data.getMonth()+1) : data.getMonth()+1;
-        ano = data.getFullYear();
-
-        return ano + '-' + mes + '-' + dia;
+        //console.log('editValue');
+        var data = this._editPicker.datepicker("getDate");
+        //console.log(data.toDateString());
+        return converterDateParaMysql(data);
 
     },
 
@@ -109,3 +102,18 @@ MyDateField.prototype = new jsGrid.Field({
 });
 
 jsGrid.fields.date = MyDateField;
+
+function converterDateParaMysql(data) {
+
+    if(!data) return;
+
+    var dia, mes, ano;
+    //console.log(data.toDateString());
+    data.setTime(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
+    //console.log(data.toDateString());
+    dia = data.getDate();
+    mes = data.getMonth() < 0 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
+    ano = data.getFullYear();
+
+    return ano + '-' + mes + '-' + dia;
+}

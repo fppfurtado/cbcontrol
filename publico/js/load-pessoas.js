@@ -97,12 +97,12 @@ $(function(){
 
                 //console.log("onItemInserting");
 
-                var dtaNasc = args.item.data_nascimento.split("/");
-                var dtaBat = args.item.data_batismo.split("/");
+//                var dtaNasc = args.item.data_nascimento.split("/");
+  //              var dtaBat = args.item.data_batismo.split("/");
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
 
-                args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
-                args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
+    //            args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
+      //          args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
                 args.item.telefone = tel;
 
             },
@@ -112,8 +112,8 @@ $(function(){
                 
                 //console.log("onItemInserted");
                 
-                args.item.data_nascimento = tratarDataMysql(args.item.data_nascimento);
-                args.item.data_batismo = tratarDataMysql(args.item.data_batismo);
+              //  args.item.data_nascimento = tratarDataMysql(args.item.data_nascimento);
+              //  args.item.data_batismo = tratarDataMysql(args.item.data_batismo);
 
             },
 
@@ -121,15 +121,10 @@ $(function(){
             onItemUpdating: function(args) {
 
                 console.log("onItemUpdating");
-/*
-                var dtaNasc = args.item.data_nascimento.split("/");
-                var dtaBat = args.item.data_batismo.split("/");
+
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
 
-                args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
-                args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
                 args.item.telefone = tel;
-                */
 
             },
 

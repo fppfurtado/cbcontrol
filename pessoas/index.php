@@ -24,12 +24,12 @@ switch($_SERVER['REQUEST_METHOD']) {
             array(
                 "primeiro_nome" => $_POST['primeiro_nome'],
                 "ultimo_nome" => $_POST['ultimo_nome'],
-                "data_nascimento" => $_POST['data_nascimento'],
-                "data_batismo" => $_POST['data_batismo'],
-                "telefone" => $_POST['telefone'],
-                "email" => $_POST['email'],
+                "data_nascimento" => empty($_POST['data_nascimento']) ? null : $_POST['data_nascimento'],
+                "data_batismo" => empty($_POST['data_batismo']) ? null : $_POST['data_batismo'],
+                "telefone" => empty($_POST['telefone']) ? null : $_POST['telefone'],
+                "email" => empty($_POST['email']) ? null : $_POST['email'],
                 "e_professor" => $_POST['e_professor'] === "true" ? 1 : 0,
-                "discipulador" => !empty($_POST['discipulador']) ? intval($_POST['discipulador']) : null
+                "discipulador" => empty($_POST['discipulador']) ? null : intval($_POST['discipulador'])
             )
         );
         break;
