@@ -27,8 +27,11 @@ MyDateField.prototype = new jsGrid.Field({
         var data, dia, mes, ano;
 
         data = new Date(value);
-        dia = data.getDate() + 1;
-        mes = data.getMonth < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
+        // Ajustando data ao Fuso Horário do sistema
+        data.setTime( data.getTime() + data.getTimezoneOffset()*60*1000 );
+
+        dia = data.getDate() < 10 ? '0' + data.getDate() : data.getDate();
+        mes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
         ano = data.getFullYear();
 
         return dia + '/' + mes + '/' + ano;
@@ -40,7 +43,8 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     editTemplate: function (value) {
-        return this._editPicker = $("<input>").datepicker();
+        var data = value.split("-");
+        return this._editPicker = $("<input>").datepicker().val(data[2] + '/' + data[1] + '/' + data[0]);
     },
 
     filterTemplate: function () {
@@ -54,7 +58,19 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     editValue: function () {
-        return this._editPicker.datepicker("getDate").toISOString();
+        console.log('editValue');
+        var data, dia, mes, ano;
+        
+        data = this._editPicker.datepicker("getDate");        
+        console.log(data.toDateString());
+        data.setTime( data.getTime() + data.getTimezoneOffset()*60*1000 );
+        console.log(data.toDateString());
+        dia = data.getDate();
+        mes = data.getMonth() < 0 ? '0' + (data.getMonth()+1) : data.getMonth()+1;
+        ano = data.getFullYear();
+
+        return ano + '-' + mes + '-' + dia;
+
     },
 
     filterValue: function () {

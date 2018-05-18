@@ -38,13 +38,7 @@ $(function(){
                 { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true },
                 { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true },
                 { type: "date", name: "data_nascimento", title: "Data de Nascimento", width: 50, filtering: true },
-                { 
-                    type: "date", 
-                    name: "data_batismo", 
-                    title: "Data de Batismo", 
-                    width: 50, 
-                    filtering: true
-                },
+                { type: "date", name: "data_batismo", title: "Data de Batismo", width: 50, filtering: true },
                 { 
                     type: "text", 
                     name: "telefone", 
@@ -89,7 +83,7 @@ $(function(){
                     textField: "nome",
                     // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function(value, item) {
-                        if(typeof value == 'string'){
+                        if(value !== '' && typeof value === 'string'){
                             var discipulador = pessoas.find(e => e.id == value);
                             return discipulador.primeiro_nome + ' ' + discipulador.ultimo_nome;
                         }
@@ -126,8 +120,8 @@ $(function(){
             // propriedade que armazena a função que irá executar antes de um item ser atualizado na tabela
             onItemUpdating: function(args) {
 
-                //console.log("onItemUpdating");
-
+                console.log("onItemUpdating");
+/*
                 var dtaNasc = args.item.data_nascimento.split("/");
                 var dtaBat = args.item.data_batismo.split("/");
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/,'g'),'');
@@ -135,6 +129,7 @@ $(function(){
                 args.item.data_nascimento = dtaNasc[2] + '-' + dtaNasc[1] + '-' + dtaNasc[0];
                 args.item.data_batismo = dtaBat[2] + '-' + dtaBat[1] + '-' + dtaBat[0];
                 args.item.telefone = tel;
+                */
 
             },
 
