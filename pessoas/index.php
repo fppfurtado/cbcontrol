@@ -42,12 +42,12 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "id" => $_PUT['id'],
                 "primeiro_nome" => $_PUT['primeiro_nome'],
                 "ultimo_nome" => $_PUT['ultimo_nome'],
-                "data_nascimento" => $_PUT['data_nascimento'],
-                "data_batismo" => $_PUT['data_batismo'],
-                "telefone" => $_PUT['telefone'],
-                "email" => $_PUT['email'],
+                "data_nascimento" => empty($_PUT['data_nascimento']) ? null : $_PUT['data_nascimento'],
+                "data_batismo" => empty($_PUT['data_batismo']) ? null : $_PUT['data_batismo'],
+                "telefone" => empty($_PUT['telefone']) ? null : $_PUT['telefone'],
+                "email" => empty($_PUT['email']) ? null : $_PUT['email'],
                 "e_professor" => $_PUT['e_professor'] === "true" ? 1 : 0,
-                "discipulador" => !empty($_POST['discipulador']) ? intval($_POST['discipulador']) : null
+                "discipulador" => empty($_PUT['discipulador']) ? null : intval($_PUT['discipulador'])
             )
         );
         break;
