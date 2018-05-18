@@ -21,14 +21,14 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     itemTemplate: function (value) {
-        
-        if(value[0] === '0') return '00/00/0000';
+
+        if (value[0] === '0') return '00/00/0000';
 
         var data, dia, mes, ano;
 
-        data = new Date(value);       
-        dia = data.getDate()+1;
-        mes = data.getMonth < 10 ? '0' + (data.getMonth()+1) : data.getMonth()+1;
+        data = new Date(value);
+        dia = data.getDate() + 1;
+        mes = data.getMonth < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
         ano = data.getFullYear();
 
         return dia + '/' + mes + '/' + ano;
@@ -58,9 +58,35 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     filterValue: function () {
+
+        var data, from, to, fromDia, fromMes, fromAno, toDia, toMes, toAno;
+
+        from = '';
+        to = '';
+
+        if (data = this._fromPicker.datepicker("getDate")) {
+
+            fromDia = data.getDate();
+            fromMes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
+            fromAno = data.getFullYear();
+
+            from = fromAno + '-' + fromMes + '-' + fromDia;
+
+        }
+
+        if (data = this._toPicker.datepicker("getDate")) {
+
+            toDia = data.getDate()
+            toMes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
+            toAno = data.getFullYear();
+
+            to = toAno + '-' + toMes + '-' + toDia;
+
+        }
+
         return {
-            from: this._fromPicker.datepicker("getDate"),
-            to: this._toPicker.datepicker("getDate")
+            from: from,
+            to: to
         };
     }
 
