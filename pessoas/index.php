@@ -14,7 +14,13 @@ switch($_SERVER['REQUEST_METHOD']) {
         $resultado = $pessoas->getAll(
             array(
                 "primeiro_nome" => $_GET['primeiro_nome'],
-                "ultimo_nome" => $_GET['ultimo_nome']
+                "ultimo_nome" => $_GET['ultimo_nome'],
+                "data_nascimento_from" => $_GET['data_nascimento']['from'],
+                "data_nascimento_from" => $_GET['data_nascimento']['to'],
+                "data_batismo_from" => $_GET['data_batismo']['from'],
+                "data_batismo_from" => $_GET['data_batismo']['to'],
+                "e_professor" => !isset($_GET['e_professor']) ? null : $_GET['e_professor'],
+                "discipulador" => intval($_GET['discipulador'])
             )
         );
         break;
