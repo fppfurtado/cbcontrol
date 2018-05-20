@@ -94,6 +94,9 @@ $(function () {
 
             // propriedade que armazena a função que irá executar antes de um item ser inserido na tabela
             onItemInserting: function (args) {
+
+                //console.log("onItemInserting");
+
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/, 'g'), '');
                 args.item.telefone = tel;
             },
@@ -101,10 +104,9 @@ $(function () {
             // propriedade que armazena a função que irá executar antes de um item ser atualizado na tabela
             onItemUpdating: function (args) {
 
-                console.log("onItemUpdating");
+                //console.log("onItemUpdating");
 
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/, 'g'), '');
-
                 args.item.telefone = tel;
 
             },
@@ -165,14 +167,3 @@ $(function () {
     });
 
 })
-
-function tratarDataMysql(data) {
-
-    // Quebra as strings de data usando o delimitador '-'
-    data = data.split('-');
-    // Concatena os componentes de data no formato 'ddmmyyyy'
-    data = data[2] + data[1] + data[0];
-
-    return data;
-
-}
