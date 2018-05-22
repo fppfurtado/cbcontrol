@@ -16,11 +16,11 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "primeiro_nome" => $_GET['primeiro_nome'],
                 "ultimo_nome" => $_GET['ultimo_nome'],
                 "data_nascimento_from" => $_GET['data_nascimento']['from'],
-                "data_nascimento_from" => $_GET['data_nascimento']['to'],
+                "data_nascimento_to" => $_GET['data_nascimento']['to'],
                 "data_batismo_from" => $_GET['data_batismo']['from'],
-                "data_batismo_from" => $_GET['data_batismo']['to'],
-                "e_professor" => !isset($_GET['e_professor']) ? null : $_GET['e_professor'],
-                "discipulador" => intval($_GET['discipulador'])
+                "data_batismo_to" => $_GET['data_batismo']['to'],
+                "e_professor" => isset($_GET['e_professor']) ? $_GET['e_professor'] : null 
+              //  "discipulador" => intval($_GET['discipulador'])
             )
         );
         break;

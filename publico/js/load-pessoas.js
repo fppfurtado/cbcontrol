@@ -72,7 +72,28 @@ $(function () {
                     }
                 },
                 { type: "text", name: "email", title: "Email", width: 100, filtering: false },
-                { type: "checkbox", name: "e_professor", title: "É Professor", width: 50, filtering: true },
+                { 
+                    type: "checkbox", 
+                    name: "e_professor", 
+                    title: "É Professor", 
+                    width: 50, 
+                    filtering: true,
+                    filterTemplate: function() {
+                        //return jsGrid.fields.checkbox.prototype.filterTemplate.call(this);
+                        var controle, optBranco, optSim, optNao;
+                        
+                        controle = this.filterControl = $('<select>');
+                        optBranco = $('<option>').attr('value', '').text('').appendTo(controle);
+                        optSim = $('<option>').attr('value', 'true').text('Sim').appendTo(controle);
+                        optNao = $('<option>').attr('value', 'false').text('Não').appendTo(controle);
+                        
+                        return controle;
+
+                    },
+                    filterValue: function() {
+                        return this.filterControl.find('option:selected').val();
+                    }
+                },
                 {
                     type: "select",
                     name: "discipulador",
@@ -83,7 +104,7 @@ $(function () {
                     textField: "nome",
                     // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function (value, item) {
-                        if (value !== '' && typeof value === 'string') {
+                        if (value !== '' && typeof value === 'string') {                            
                             var discipulador = pessoas.find(e => e.id == value);
                             return discipulador.primeiro_nome + ' ' + discipulador.ultimo_nome;
                         }

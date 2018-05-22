@@ -47,29 +47,40 @@ Class PessoaDAO implements iDAO {
 
         $pnome = "%" . $filter["primeiro_nome"] . "%";
         $unome = "%" . $filter["ultimo_nome"] . "%";
-        //$eProf = "%" . $filter["e_professor"] . "%";
-       // $discipulador = "%" . $filter["discipulador"] . "%";
-
+        $dn_from = $filter["data_nascimento_from"];
+        $dn_to = $filter["data_nascimento_to"];
+        $db_from = $filter["data_batismo_from"];
+        $db_to = $filter["data_batismo_to"];
+        $eProf = $filter["e_professor"];
+        //$discipulador = $filter["discipulador"];
 
         $sql = "SELECT * FROM marco_pessoa
         WHERE 
-        primeiro_nome LIKE :pnome 
-        AND ultimo_nome LIKE :unome ORDER BY primeiro_nome, ultimo_nome";
-        //AND e_professor = :eProf 
-        //AND discipulador = :discipulador;
+        (primeiro_nome LIKE :pnome 
+        AND ultimo_nome LIKE :unome)";
+
+        if(!empty($eProf)) {
+            $sql = $sql." AND e_professor = :eProf";            
+        }
 
         $q = $this->db->prepare($sql);
         $q->bindParam(":pnome", $pnome);
         $q->bindParam(":unome", $unome);
-        //$q->bindParam(":eProf", $eProf);
-        //$q->bindParam(":discipulador", $discipulador);
-        $q->execute();
-        $rows = $q->fetchAll();
 
+        if(!empty($eProf)) {
+            $eProf = $eProf === 'true' ? 1 : 0;
+            $q->bindParam(":eProf", $eProf, PDO::PARAM_BOOL);
+        }        
+        
+        $q->execute();
+
+        $rows = $q->fetchAll();
         $result = array();
+        
         foreach($rows as $row) {
             array_push($result, $this->read($row));
         }
+
         return $result;
     }
 
