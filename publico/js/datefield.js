@@ -59,9 +59,7 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     editValue: function () {
-        //console.log('editValue');
         var data = this._editPicker.datepicker("getDate");
-        //console.log(data.toDateString());
         return converterDateParaMysql(data);
 
     },
@@ -74,23 +72,11 @@ MyDateField.prototype = new jsGrid.Field({
         to = '';
 
         if (data = this._fromPicker.datepicker("getDate")) {
-
-            fromDia = data.getDate();
-            fromMes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
-            fromAno = data.getFullYear();
-
-            from = fromAno + '-' + fromMes + '-' + fromDia;
-
+            from = converterDateParaMysql(data);
         }
 
         if (data = this._toPicker.datepicker("getDate")) {
-
-            toDia = data.getDate()
-            toMes = data.getMonth() < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
-            toAno = data.getFullYear();
-
-            to = toAno + '-' + toMes + '-' + toDia;
-
+            to = converterDateParaMysql(data);
         }
 
         return {
