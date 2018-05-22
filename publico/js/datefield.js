@@ -1,3 +1,18 @@
+function converterDateParaMysql(data) {
+
+    if(!data) return;
+
+    var dia, mes, ano;
+    //console.log(data.toDateString());
+    data.setTime(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
+    //console.log(data.toDateString());
+    dia = data.getDate();
+    mes = data.getMonth() < 0 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
+    ano = data.getFullYear();
+
+    return ano + '-' + mes + '-' + dia;
+}
+
 var MyDateField = function (config) {
     jsGrid.Field.call(this, config);
 };
@@ -88,18 +103,3 @@ MyDateField.prototype = new jsGrid.Field({
 });
 
 jsGrid.fields.date = MyDateField;
-
-function converterDateParaMysql(data) {
-
-    if(!data) return;
-
-    var dia, mes, ano;
-    //console.log(data.toDateString());
-    data.setTime(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
-    //console.log(data.toDateString());
-    dia = data.getDate();
-    mes = data.getMonth() < 0 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
-    ano = data.getFullYear();
-
-    return ano + '-' + mes + '-' + dia;
-}
