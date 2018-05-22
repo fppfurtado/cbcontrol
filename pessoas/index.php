@@ -19,8 +19,8 @@ switch($_SERVER['REQUEST_METHOD']) {
                 "data_nascimento_to" => $_GET['data_nascimento']['to'],
                 "data_batismo_from" => $_GET['data_batismo']['from'],
                 "data_batismo_to" => $_GET['data_batismo']['to'],
-                "e_professor" => isset($_GET['e_professor']) ? $_GET['e_professor'] : null 
-              //  "discipulador" => intval($_GET['discipulador'])
+                "e_professor" => isset($_GET['e_professor']) ? $_GET['e_professor'] : null,
+                "discipulador" => intval($_GET['discipulador'])
             )
         );
         break;
