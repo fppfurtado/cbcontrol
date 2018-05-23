@@ -56,17 +56,17 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     insertTemplate: function (value) {
-        return this._insertPicker = $("<input>").datepicker();
+        return this._insertPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000');
     },
 
     editTemplate: function (value) {
         var data = value.split("-");
-        return this._editPicker = $("<input>").datepicker().val(data[2] + '/' + data[1] + '/' + data[0]);
+        return this._editPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000').val(data[2] + '/' + data[1] + '/' + data[0]);
     },
 
     filterTemplate: function () {
-        this._fromPicker = $("<input>").datepicker();
-        this._toPicker = $("<input>").datepicker();
+        this._fromPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000');
+        this._toPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000');
         return $("<div>").append(this._fromPicker).append(this._toPicker);
     },
 
