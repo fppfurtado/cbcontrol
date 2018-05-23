@@ -31,7 +31,6 @@ Class PessoaDAO implements iDAO {
     }
 
     public function getById($id) {
-        
         $sql = "SELECT * FROM marco_pessoa WHERE id = :id";
 
         $q = $this->db->prepare($sql);
@@ -153,7 +152,11 @@ Class PessoaDAO implements iDAO {
         $q->bindParam(":email", $data["email"]);
         $q->bindParam(":eProf", $data["e_professor"], PDO::PARAM_INT);
         $q->bindParam(":discipulador", $data["discipulador"], PDO::PARAM_INT);
-        $q->execute();
+
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return;
+        }
 
         return $this->getById($this->db->lastInsertId());
 

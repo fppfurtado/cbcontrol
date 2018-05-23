@@ -35,8 +35,8 @@ $(function () {
 
             // Propriedade que contém um vetor com objetos que representam os campos da tabela
             fields: [
-                { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true },
-                { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true },
+                { type: "text", name: "primeiro_nome", title: "Primeiro Nome", width: 60, filtering: true, validate: "required" },
+                { type: "text", name: "ultimo_nome", title: "Último Nome", width: 60, filtering: true, validate: "required" },
                 { type: "date", name: "data_nascimento", title: "Data de Nascimento", width: 50, filtering: true },
                 { type: "date", name: "data_batismo", title: "Data de Batismo", width: 50, filtering: true },
                 {
@@ -45,6 +45,7 @@ $(function () {
                     title: "Telefone",
                     width: 50,
                     filtering: false,
+                    validate: "required",
                     // propriedade que define o coteúdo da célula em modo de exibição
                     itemTemplate: function (value, item) {
                         //console.log('telefone:itemTemplate => ' + value);
