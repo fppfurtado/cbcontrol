@@ -6,7 +6,7 @@ function converterDateParaMysql(data) {
     //console.log(data.toDateString());
     data.setTime(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
     //console.log(data.toDateString());
-    dia = data.getDate();
+    dia = data.getDate() < 10 ? '0' + data.getDate() : data.getDate();
     mes = data.getMonth() < 0 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1;
     ano = data.getFullYear();
 
@@ -23,7 +23,9 @@ $.datepicker.setDefaults({
     dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
     dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    changeMonth: true,
+    changeYear: true
 });
 
 MyDateField.prototype = new jsGrid.Field({
