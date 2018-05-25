@@ -60,8 +60,15 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     editTemplate: function (value) {
-        var data = value.split("-");
-        return this._editPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000').val(data[2] + '/' + data[1] + '/' + data[0]);
+
+        if(value) {
+            var data = value.split("-");
+            return this._editPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000').val(data[2] + '/' + data[1] + '/' + data[0]);
+        } else {
+            return this._editPicker = $("<input>").datepicker().addClass('date').mask('00/00/0000');
+        }
+
+        
     },
 
     filterTemplate: function () {

@@ -35,7 +35,11 @@ Class PessoaDAO implements iDAO {
 
         $q = $this->db->prepare($sql);
         $q->bindParam(":id", $id, PDO::PARAM_INT);
-        $q->execute();
+        
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return;
+        }
 
         $rows = $q->fetchAll();
 
@@ -124,7 +128,10 @@ Class PessoaDAO implements iDAO {
             $q->bindParam(":discipulador", $discipulador, PDO::PARAM_INT);
         }
         
-        $q->execute();
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return;
+        }
 
         $rows = $q->fetchAll();
         $result = array();
@@ -186,7 +193,12 @@ Class PessoaDAO implements iDAO {
         $q->bindParam(":eProf", $data["e_professor"], PDO::PARAM_INT);
         $q->bindParam(":discipulador", $data["discipulador"], PDO::PARAM_INT);
         $q->bindParam(":id", $data["id"], PDO::PARAM_INT);
-        $q->execute();
+        
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return;
+        }
+
     }
 
     public function remove($id) {
@@ -194,7 +206,12 @@ Class PessoaDAO implements iDAO {
         WHERE id = :id";
         $q = $this->db->prepare($sql);
         $q->bindParam(":id", $id, PDO::PARAM_INT);
-        $q->execute();
+        
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return;
+        }
+
     }
     
 }
