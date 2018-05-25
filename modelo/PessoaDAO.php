@@ -86,7 +86,7 @@ Class PessoaDAO implements iDAO {
             $sql = $sql." AND e_professor = :eProf";
         }
 
-        if(!is_null($discipulador)) {
+        if(!empty($discipulador)) {
             $sql = $sql." AND discipulador = :discipulador";
         }
 
@@ -124,7 +124,7 @@ Class PessoaDAO implements iDAO {
             $q->bindParam(":eProf", $eProf, PDO::PARAM_BOOL);
         }
         
-        if(!is_null($discipulador)) {
+        if(!empty($discipulador)) {
             $q->bindParam(":discipulador", $discipulador, PDO::PARAM_INT);
         }
         

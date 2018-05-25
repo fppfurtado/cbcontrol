@@ -8,7 +8,7 @@ $(function () {
     */
     $.ajax({
         type: "GET",
-        url: "pessoas/?primeiro_nome=&ultimo_nome=&data_nascimento[from]=&data_nascimento[to]=&data_batismo[from]=&data_batismo[to]=&discipulador="
+        url: "pessoas/"
     }).done(function (pessoas) {
 
         /* 
