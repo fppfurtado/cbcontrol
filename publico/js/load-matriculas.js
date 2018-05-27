@@ -18,20 +18,20 @@ $(function () {
 
         /* 
         Array que irá armazenar as informações necessárias dos 
-        objetos Pessoa: 'id' e 'nome'. 
+        objetos Pessoa: "id" e "nome". 
         */
         var alunos = [];
         
-        // percorrendo o array de matriculas pa ra popular o array 'alunos'
+        // percorrendo o array de matriculas pa ra popular o array "alunos"
         for (var i = 0; i < pessoas[0].length; i++) {
             // concatenando primeiro_nome e ultimo_nome
             alunos.push({
                 id: pessoas[0][i].id,
-                nome: pessoas[0][i].primeiro_nome + ' ' + pessoas[0][i].ultimo_nome
+                nome: pessoas[0][i].primeiro_nome + " " + pessoas[0][i].ultimo_nome
             });
         }
 
-        // inserindo um objeto vazio na primeira posição dos arrays que irão preencher o 'select'
+        // inserindo um objeto vazio na primeira posição dos arrays que irão preencher o "select"
         alunos.unshift("");
         classes[0].unshift("");
         
@@ -52,16 +52,16 @@ $(function () {
                         
                         var controle, optBranco, optSim, optNao;
                         
-                        controle = this.filterControl = $('<select>');
-                        optBranco = $('<option>').attr('value', '').text('').appendTo(controle);
-                        optSim = $('<option>').attr('value', 'true').text('Sim').appendTo(controle);
-                        optNao = $('<option>').attr('value', 'false').text('Não').appendTo(controle);
+                        controle = this.filterControl = $("<select>");
+                        optBranco = $("<option>").attr("value", "").text("").appendTo(controle);
+                        optSim = $("<option>").attr("value", "true").text("Sim").appendTo(controle);
+                        optNao = $("<option>").attr("value", "false").text("Não").appendTo(controle);
                         
                         return controle;
 
                     },
                     filterValue: function() {
-                        return this.filterControl.find('option:selected').val();
+                        return this.filterControl.find("option:selected").val();
                     }
                 },
                 { type: "date", name: "data_entrada", title: "Data Entrada", width: 50},
@@ -94,7 +94,7 @@ $(function () {
                         data: filter
                     });
                 },
-                // Requisição do tipo POST ao servidor, inserindo a matriculas contida no objeto 'item'.
+                // Requisição do tipo POST ao servidor, inserindo a matriculas contida no objeto "item".
                 insertItem: function (item) {
                     return $.ajax({
                         type: "POST",
@@ -102,7 +102,7 @@ $(function () {
                         data: item
                     });
                 },
-                // Requisição do tipo PUT ao servidor, atualizando informações da pessoa contida no objeto 'item'.
+                // Requisição do tipo PUT ao servidor, atualizando informações da pessoa contida no objeto "item".
                 updateItem: function (item) {
                     return $.ajax({
                         type: "PUT",
@@ -110,7 +110,7 @@ $(function () {
                         data: item
                     });
                 },
-                // Requisição do tipo DELETE ao servidor, removendo a matriculas contida no objeto 'item'.
+                // Requisição do tipo DELETE ao servidor, removendo a matriculas contida no objeto "item".
                 deleteItem: function (item) {
                     return $.ajax({
                         type: "DELETE",
