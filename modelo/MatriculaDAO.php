@@ -17,19 +17,10 @@ Class MatriculaDAO implements iDAO {
     private function read($row) {
 
         $result = new Matricula();
-        $pessoa = new Pessoa();
-        $classe = new Classe();
-
-        $pessoa->id = $row["pessoa_id"];
-        $pessoa->primeiro_nome = $row["pnome"];
-        $pessoa->ultimo_nome = $row["unome"];
-
-        $classe->id = $row["classe_id"];
-        $classe->nome = $row["classe"];
-
+        
         $result->id = $row["id"];
-        $result->pessoa = $pessoa;
-        $result->classe = $classe;
+        $result->pessoa_id = $row["pessoa_id"];
+        $result->classe_id = $row["classe_id"];
         $result->esta_cursando = $row["esta_cursando"] === 1 ? true : false;
         $result->data_entrada = $row["data_entrada"];
         $result->data_saida = $row["data_saida"];

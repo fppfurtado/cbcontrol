@@ -23,7 +23,7 @@ $(function () {
         var alunos = [];
         
         // percorrendo o array de matriculas pa ra popular o array 'alunos'
-        for (var i = 0; i < pessoas.length; i++) {
+        for (var i = 0; i < pessoas[0].length; i++) {
             // concatenando primeiro_nome e ultimo_nome
             alunos.push({
                 id: pessoas[0][i].id,
@@ -34,14 +34,14 @@ $(function () {
         // inserindo um objeto vazio na primeira posição dos arrays que irão preencher o 'select'
         alunos.unshift("");
         classes[0].unshift("");
-
+        
         // Carregando o plugin JSGrid
         $("#jsGrid").jsGrid({
 
             // Propriedade que contém um vetor com objetos que representam os campos da tabela
             fields: [
-                { type: "select", name: "pessoa.id", title: "Nome", width: 70, filtering: true, items: alunos, valueField: "id", textField: "nome", validate: "required" },
-                { type: "select", name: "classe.id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome",validate: "required" },
+                { type: "select", name: "pessoa_id", title: "Nome", width: 70, filtering: true, items: alunos, valueField: "id", textField: "nome", validate: "required" },
+                { type: "select", name: "classe_id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome",validate: "required" },
                 { 
                     type: "checkbox", 
                     name: "esta_cursando", 

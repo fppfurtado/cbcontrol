@@ -28,8 +28,8 @@ switch($_SERVER['REQUEST_METHOD']) {
     case "POST":
         $resultado = $pessoas->insert(
             array(
-                "pessoa_id" => isset($_POST['pessoa']['id']) ? $_POST['pessoa']['id'] : null,
-                "classe_id" => isset($_POST['classe']['id']) ? $_POST['classe']['id'] : null,
+                "pessoa_id" => isset($_POST['pessoa_id']) ? $_POST['pessoa_id'] : null,
+                "classe_id" => isset($_POST['classe_id']) ? $_POST['classe_id'] : null,
                 "esta_cursando" => isset($_POST['esta_cursando']) ? $_POST['esta_cursando'] : null,
                 "data_entrada" => isset($_POST['data_entrada']) ? $_POST['data_entrada'] : null,
                 "data_saida" => isset($_POST['data_saida']) ? $_POST['data_saida'] : null
