@@ -96,20 +96,7 @@ $(function () {
                     }
                 },
                 {
-                    type: "select",
-                    name: "discipulador",
-                    title: "Discipulador",
-                    width: 100,
-                    items: discipuladores,
-                    valueField: "id",
-                    textField: "nome",
-                    // propriedade que define o coteúdo da célula em modo de exibição
-                    itemTemplate: function (value, item) {
-                        if (value !== '' && typeof value === 'string') {                            
-                            var discipulador = pessoas.find(e => e.id == value);
-                            return discipulador.primeiro_nome + ' ' + discipulador.ultimo_nome;
-                        }
-                    }
+                    type: "select", name: "discipulador", title: "Discipulador", width: 100, items: discipuladores, valueField: "id", textField: "nome"
                 },
                 { type: "control" }
             ],
