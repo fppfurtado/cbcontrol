@@ -24,9 +24,9 @@
 
     <ul class="menu">
             <li><a id="pessoas" href="#pessoas" onclick="clickHandler(event);">pessoas</a></li>
-            <li><a id="matriculas" href="#matricula" onclick="clickHandler(event);">matricula</a></li>            
-            <!--<li><a id="dons" href="#dons" onclick="clickHandler(event);">dons espirituais</a></li>
-            <li><a id="aulas" href="#aulas" onclick="clickHandler(event);">aulas</a></li>-->
+            <li><a id="matriculas" href="#matricula" onclick="clickHandler(event);">matricula</a></li>
+            <li><a id="aulas" href="#aulas" onclick="clickHandler(event);">aulas</a></li>         
+            <!--<li><a id="dons" href="#dons" onclick="clickHandler(event);">dons espirituais</a></li>-->            
     </ul>    
 
     <br>
@@ -44,9 +44,11 @@
 
             switch (id) {
                 case "pessoas":
+                    $("#jsGrid").jsGrid("destroy");
                     scriptJS.src = "publico/js/load-pessoas.js"
                     break;
                 case "dons":
+                    $("#jsGrid").jsGrid("destroy");
                     scriptJS.src = "publico/js/load-dons-espirituais.js"
                     break;
                 case "matriculas":
@@ -54,7 +56,8 @@
                     scriptJS.src = "publico/js/load-matriculas.js"
                     break;
                 case "aulas":
-                scriptJS.src = "publico/js/load-aulas.js"
+                    $("#jsGrid").jsGrid("destroy");
+                    scriptJS.src = "publico/js/load-aulas.js"
                     break;
             }
             
