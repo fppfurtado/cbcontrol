@@ -42,7 +42,7 @@ $(function () {
             fields: [
                 { type: "date", name: "data", title: "Data", width: 50 },
                 { type: "select", name: "classe_id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome",validate: "required" },
-                { type: "select", name: "professor_id", title: "Nome", width: 70, filtering: true, items: professores, valueField: "id", textField: "nome", validate: "required" },                
+                { type: "select", name: "professor_id", title: "Professor", width: 70, filtering: true, items: professores, valueField: "id", textField: "nome", validate: "required" },                
                 { type: "number", name: "num_licao", title:"Número Lição", width: 40 },
                 { type: "number", name: "estudo_licao", title:"Estudo Lição", width: 40 },
                 { type: "number", name: "pequeno_grupo", title:"Pequeno Grupo", width: 40 },
