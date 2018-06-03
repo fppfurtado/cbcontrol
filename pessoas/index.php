@@ -19,7 +19,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
                 "data_nascimento_to" => isset($_GET["data_nascimento"]["to"]) ? $_GET["data_nascimento"]["to"] : null,
                 "data_batismo_from" => isset($_GET["data_batismo"]["from"]) ? $_GET["data_batismo"]["from"] : null,
                 "data_batismo_to" => isset($_GET["data_batismo"]["to"]) ? $_GET["data_batismo"]["to"] : null,
-                "e_professor" => isset($_GET["e_professor"]) ? ($_GET["e_professor"] === "true" ? 1 : 0) : null,
+                "e_professor" => isset($_GET["e_professor"]) ? $_GET["e_professor"] : null,
                 "discipulador" => isset($_GET["discipulador"]) ? intval($_GET["discipulador"]) : null
             )
         );

@@ -8,7 +8,7 @@ $(function () {
     $.when(
         $.ajax({
             type: "GET",
-            url: "pessoas/"
+            url: "pessoas/?e_professor=true"
         }),
         $.ajax({
             type: "GET",
@@ -48,8 +48,25 @@ $(function () {
                 { type: "number", name: "pequeno_grupo", title:"Pequeno Grupo", width: 40 },
                 { type: "number", name: "estudo_biblico", title:"Estudo Bíblico", width: 40 },
                 { type: "number", name: "ativ_missionarias", title:"Atividades Missionárias", width: 40 },
-                { type: "control" }
+                { 
+                    type: "control",
+                    itemTemplate: function() {
+                        var $result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                        var $myButton = $("<button>").css("background", "url(assets/people.png)").css("width","20").css("height","20");
+                        return $result.add($myButton);
+                    }
+                }
             ],
+
+            rowClick: function(args) {
+                $("<div>").jsGrid({
+                    controller: {
+                        loadData: function(filter) {
+                            return
+                        }
+                    }
+                }).dialog();
+            },
             
             width: "100%",
             height: "auto",
