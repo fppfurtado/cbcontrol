@@ -95,9 +95,7 @@ $(function () {
                         return this.filterControl.find('option:selected').val();
                     }
                 },
-                {
-                    type: "select", name: "discipulador", title: "Discipulador", width: 100, items: discipuladores, valueField: "id", textField: "nome"
-                },
+                { type: "select", name: "discipulador", title: "Discipulador", width: 100, items: discipuladores, valueField: "id", textField: "nome" },
                 { type: "control" }
             ],
 

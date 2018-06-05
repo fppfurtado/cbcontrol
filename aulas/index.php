@@ -5,14 +5,14 @@ include "../modelo/AulaDAO.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb["db"], $configDb["usuario"], $configDb["senha"]);
-$pessoas = new AulaDAO($db);
+$aulas = new AulaDAO($db);
 
 $resultado = array();
 
 switch($_SERVER["REQUEST_METHOD"]) {
 
     case "GET":
-        $resultado = $pessoas->getAll(
+        $resultado = $aulas->getAll(
             array(
                 "data_from" => isset($_GET["data"]["from"]) ? $_GET["data"]["from"] : null,
                 "data_to" => isset($_GET["data"]["to"]) ? $_GET["data"]["to"] : null,
@@ -28,7 +28,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "POST":
-        $resultado = $pessoas->insert(
+        $resultado = $aulas->insert(
             array(
                 "data" => isset($_POST["data"]) ? $_POST["data"] : null,
                 "classe_id" => isset($_POST["classe_id"]) ? $_POST["classe_id"] : null,
@@ -45,7 +45,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "PUT":
         parse_str(file_get_contents("php://input"), $_PUT);
 
-        $resultado = $pessoas->update(
+        $resultado = $aulas->update(
             array(
                 "id" => isset($_PUT["id"]) ? $_PUT["id"] : null,
                 "data" => isset($_PUT["data"]) ? $_PUT["data"] : null,
@@ -63,7 +63,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "DELETE":
         parse_str(file_get_contents("php://input"), $_DELETE);
         
-        $resultado = $pessoas->remove(intval($_DELETE["id"]));
+        $resultado = $aulas->remove(intval($_DELETE["id"]));
         break;         
 
 }

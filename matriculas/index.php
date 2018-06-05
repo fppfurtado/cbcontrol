@@ -5,14 +5,14 @@ include "../modelo/MatriculaDAO.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb["db"], $configDb["usuario"], $configDb["senha"]);
-$pessoas = new MatriculaDAO($db);
+$matriculas = new MatriculaDAO($db);
 
 $resultado = array();
 
 switch($_SERVER["REQUEST_METHOD"]) {
 
     case "GET":
-        $resultado = $pessoas->getAll(
+        $resultado = $matriculas->getAll(
             array(
                 "pessoa_id" => isset($_GET["pessoa_id"]) ? $_GET["pessoa_id"] : null,
                 "classe_id" => isset($_GET["classe_id"]) ? $_GET["classe_id"] : null,
@@ -26,7 +26,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "POST":
-        $resultado = $pessoas->insert(
+        $resultado = $matriculas->insert(
             array(
                 "pessoa_id" => isset($_POST["pessoa_id"]) ? $_POST["pessoa_id"] : null,
                 "classe_id" => isset($_POST["classe_id"]) ? $_POST["classe_id"] : null,
@@ -40,7 +40,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "PUT":
         parse_str(file_get_contents("php://input"), $_PUT);
 
-        $resultado = $pessoas->update(
+        $resultado = $matriculas->update(
             array(
                 "id" => isset($_PUT["id"]) ? $_PUT["id"] : null,
                 "pessoa_id" => isset($_PUT["pessoa_id"]) ? $_PUT["pessoa_id"] : null,
@@ -55,7 +55,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "DELETE":
         parse_str(file_get_contents("php://input"), $_DELETE);
         
-        $resultado = $pessoas->remove(intval($_DELETE["id"]));
+        $resultado = $matriculas->remove(intval($_DELETE["id"]));
         break;         
 
 }

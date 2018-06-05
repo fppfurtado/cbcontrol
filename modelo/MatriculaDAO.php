@@ -1,8 +1,6 @@
 <?php
 
 include "Matricula.php";
-include "Pessoa.php";
-include "Classe.php";
 include "iDAO.php";
 
 Class MatriculaDAO implements iDAO {
