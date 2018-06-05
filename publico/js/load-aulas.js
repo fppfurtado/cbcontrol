@@ -43,11 +43,11 @@ $(function () {
                 { type: "date", name: "data", title: "Data", width: 50 },
                 { type: "select", name: "classe_id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome", validate: "required" },
                 { type: "select", name: "professor_id", title: "Professor", width: 70, filtering: true, items: professores, valueField: "id", textField: "nome", validate: "required" },
-                { type: "number", name: "num_licao", title: "Número Lição", width: 40 },
-                { type: "number", name: "estudo_licao", title: "Estudo Lição", width: 40 },
-                { type: "number", name: "pequeno_grupo", title: "Pequeno Grupo", width: 40 },
-                { type: "number", name: "estudo_biblico", title: "Estudo Bíblico", width: 40 },
-                { type: "number", name: "ativ_missionarias", title: "Atividades Missionárias", width: 40 },
+                { type: "number", name: "num_licao", title: "Número Lição", width: 40, align: "center" },
+                { type: "number", name: "estudo_licao", title: "Estudo Lição", width: 40, align: "center" },
+                { type: "number", name: "pequeno_grupo", title: "Pequeno Grupo", width: 40, align: "center" },
+                { type: "number", name: "estudo_biblico", title: "Estudo Bíblico", width: 40, align: "center" },
+                { type: "number", name: "ativ_missionarias", title: "Atividades Missionárias", width: 40, align: "center" },
                 { type: "control" }
             ],
 
@@ -69,7 +69,7 @@ $(function () {
 
                     $("<div>").jsGrid({
                         fields: [
-                            { type: "select", name: "pessoa_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "id" },
+                            { type: "select", name: "pessoa_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "id", align: "left" },
                             { type: "control", editButton: false }
                         ],
                         width: "90%",
