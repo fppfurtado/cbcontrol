@@ -19,7 +19,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
                 "data_nascimento_to" => isset($_GET["data_nascimento"]["to"]) ? $_GET["data_nascimento"]["to"] : null,
                 "data_batismo_from" => isset($_GET["data_batismo"]["from"]) ? $_GET["data_batismo"]["from"] : null,
                 "data_batismo_to" => isset($_GET["data_batismo"]["to"]) ? $_GET["data_batismo"]["to"] : null,
-                "e_professor" => isset($_GET["e_professor"]) ? $_GET["e_professor"] : null,
+                "e_professor" => isset($_GET["e_professor"]) ? ($_GET["e_professor"] === "true" ? 1 : 0) : null,
                 "discipulador" => isset($_GET["discipulador"]) ? intval($_GET["discipulador"]) : null
             )
         );
@@ -34,7 +34,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
                 "data_batismo" => empty($_POST["data_batismo"]) ? null : $_POST["data_batismo"],
                 "telefone" => empty($_POST["telefone"]) ? null : $_POST["telefone"],
                 "email" => empty($_POST["email"]) ? null : $_POST["email"],
-                "e_professor" => $_POST["e_professor"] === "true" ? 1 : 0,
+                "e_professor" => empty($_POST["e_professor"]) ? null : ($_POST["e_professor"] === "true" ? 1 : 0),
                 "discipulador" => empty($_POST["discipulador"]) ? null : intval($_POST["discipulador"])
             )
         );
@@ -52,7 +52,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
                 "data_batismo" => empty($_PUT["data_batismo"]) ? null : $_PUT["data_batismo"],
                 "telefone" => empty($_PUT["telefone"]) ? null : $_PUT["telefone"],
                 "email" => empty($_PUT["email"]) ? null : $_PUT["email"],
-                "e_professor" => $_PUT["e_professor"] === "true" ? 1 : 0,
+                "e_professor" => empty($_PUT["e_professor"]) ? null : ($_PUT["e_professor"] === "true" ? 1 : 0),
                 "discipulador" => empty($_PUT["discipulador"]) ? null : intval($_PUT["discipulador"])
             )
         );

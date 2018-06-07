@@ -120,7 +120,6 @@ Class PessoaDAO implements iDAO {
 
         // Substituindo parametros de e_professor no SQL
         if(!empty($eProf)) {
-            $eProf = $eProf === "true" ? 1 : 0;
             $q->bindParam(":eProf", $eProf, PDO::PARAM_BOOL);
         }
         

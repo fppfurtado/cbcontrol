@@ -19,7 +19,7 @@ Class MatriculaDAO implements iDAO {
         $result->id = $row["id"];
         $result->pessoa_id = $row["pessoa_id"];
         $result->classe_id = $row["classe_id"];
-        $result->esta_cursando = $row["esta_cursando"] === 1 ? true : false;
+        $result->esta_cursando = $row["esta_cursando"] === "1" ? true : false;
         $result->data_entrada = $row["data_entrada"];
         $result->data_saida = $row["data_saida"];
         
