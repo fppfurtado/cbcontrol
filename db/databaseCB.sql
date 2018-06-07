@@ -40,8 +40,10 @@ CREATE TABLE IF NOT EXISTS marco_matricula(
 	data_entrada DATE,
 	data_saida DATE,
 	CONSTRAINT PRIMARY KEY (id),
-	CONSTRAINT FOREIGN KEY (pessoa_id) REFERENCES marco_pessoa (id),
-	CONSTRAINT FOREIGN KEY (classe_id) REFERENCES marco_classe (id),
+	CONSTRAINT FOREIGN KEY (pessoa_id) REFERENCES marco_pessoa (id)
+		ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (classe_id) REFERENCES marco_classe (id)
+		ON DELETE RESTRICT,
 	CONSTRAINT UNIQUE (pessoa_id, classe_id, data_entrada)
 );
 
@@ -56,8 +58,10 @@ CREATE TABLE IF NOT EXISTS marco_aula(
 	estudo_biblico BOOLEAN,
 	ativ_missionarias BOOLEAN,
 	CONSTRAINT PRIMARY KEY (id),
-	CONSTRAINT FOREIGN KEY (classe_id) REFERENCES marco_classe (id),
-	CONSTRAINT FOREIGN KEY (professor_id) REFERENCES marco_pessoa (id),
+	CONSTRAINT FOREIGN KEY (classe_id) REFERENCES marco_classe (id)
+		ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (professor_id) REFERENCES marco_pessoa (id)
+		ON DELETE SET NULL,
 	CONSTRAINT CHECK (num_licao >= 0)
 );
 
@@ -75,8 +79,10 @@ CREATE TABLE IF NOT EXISTS marco_presenca(
 	aula_id MEDIUMINT NOT NULL,
 	pessoa_id SMALLINT NOT NULL,
 	CONSTRAINT PRIMARY KEY (aula_id, pessoa_id),
-	CONSTRAINT FOREIGN KEY (aula_id) REFERENCES marco_aula (id),
+	CONSTRAINT FOREIGN KEY (aula_id) REFERENCES marco_aula (id)
+		ON DELETE CASCADE,
 	CONSTRAINT FOREIGN KEY (pessoa_id) REFERENCES marco_pessoa (id)
+		ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS marco_pessoa_dom(
