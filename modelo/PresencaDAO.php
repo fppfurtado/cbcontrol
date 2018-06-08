@@ -25,10 +25,12 @@ Class PresencaDAO implements iDAO {
 
     public function getById($id) {
         
-        $sql = "SELECT * FROM marco_presenca WHERE aula_id = :aid";
+        $sql = "SELECT * FROM marco_presenca mpr
+        INNER JOIN marco_pessoa mpe ON mpr.pessoa_id = mpe.id
+        WHERE mpr.pessoa_id = :pid";
 
         $q = $this->db->prepare($sql);
-        $q->bindParam(":aid", $id, PDO::PARAM_INT);
+        $q->bindParam(":pid", $id, PDO::PARAM_INT);
 
         if(!$q->execute()) {
             print_r($q->errorInfo());
@@ -37,7 +39,7 @@ Class PresencaDAO implements iDAO {
 
         $rows = $q->fetchAll();
 
-        return $this->read($rows[0]);
+        return $this->read($rows[sizeof($rows)-1]);
     }
 
     public function getAll($filter) {
@@ -91,7 +93,7 @@ Class PresencaDAO implements iDAO {
             return;
         }
         
-        return $this->getById($data["aula_id"]);
+        return $this->getById($data["pessoa_id"]);
 
     }
 

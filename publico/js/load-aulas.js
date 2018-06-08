@@ -55,18 +55,15 @@ $(function () {
 
                 $.ajax({
                     type: "GET",
-                    url: "pessoas/"
-                }).done(function (pessoas) {
+                    url: "alunos/"
+                }).done(function (alunos) {
 
-                    var alunos = [];
+                    //var alunos = [];
 
-                    for (var i = 0; i < pessoas.length; i++) {
-                        alunos.push({
-                            id: pessoas[i].id,
-                            nome: pessoas[i].primeiro_nome + " " + pessoas[i].ultimo_nome
-                        });
+                    for (var i = 0; i < alunos.length; i++) {
+                        alunos[i].nome = alunos[i].primeiro_nome + " " + alunos[i].ultimo_nome;
                     }
-
+                    //window.alunos = alunos;
                     $("<div>").jsGrid({
                         fields: [
                             { type: "select", name: "pessoa_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "id", align: "left" },
