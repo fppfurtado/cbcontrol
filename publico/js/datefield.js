@@ -1,6 +1,6 @@
 function converterDateParaMysql(data) {
 
-    if(!data) return;
+    if(!data) return "";
 
     var dia, mes, ano;
     //console.log(data.toDateString());
@@ -85,7 +85,6 @@ MyDateField.prototype = new jsGrid.Field({
     editValue: function () {
         var data = this._editPicker.datepicker("getDate");
         return converterDateParaMysql(data);
-
     },
 
     filterValue: function () {

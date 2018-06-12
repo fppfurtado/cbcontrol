@@ -112,7 +112,7 @@ $(function () {
             onItemUpdating: function (args) {
 
                 //console.log("onItemUpdating");
-
+              
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/, 'g'), '');
                 args.item.telefone = tel;
 

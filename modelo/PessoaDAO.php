@@ -185,14 +185,17 @@ Class PessoaDAO implements iDAO {
         $q = $this->db->prepare($sql);
         $q->bindParam(":pnome", $data["primeiro_nome"]);
         $q->bindParam(":unome", $data["ultimo_nome"]);
-        $q->bindParam(":dtaNasc", $data["data_nascimento"], PDO::PARAM_STR);
-        $q->bindParam(":dtaBatismo", $data["data_batismo"], PDO::PARAM_STR);
+        $q->bindParam(":dtaNasc", $data["data_nascimento"]);
+        $q->bindParam(":dtaBatismo", $data["data_batismo"]);
         $q->bindParam(":tel", $data["telefone"]);
         $q->bindParam(":email", $data["email"]);
         $q->bindParam(":eProf", $data["e_professor"], PDO::PARAM_INT);
         $q->bindParam(":discipulador", $data["discipulador"], PDO::PARAM_INT);
         $q->bindParam(":id", $data["id"], PDO::PARAM_INT);
-        
+     
+        //echo "dtaN: ".$data["data_nascimento"];
+        //echo "dtaB: ".$data["data_batismo"];
+
         if(!$q->execute()) {
             print_r($q->errorInfo());
             return;
