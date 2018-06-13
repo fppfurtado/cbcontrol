@@ -72,7 +72,7 @@ Class AlunoDAO {
             }
         }
 
-        $sql = $sql . " ORDER BY nome";
+        $sql = $sql . " ORDER BY pnome";
 
         $q = $this->db->prepare($sql);       
         

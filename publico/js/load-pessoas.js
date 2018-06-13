@@ -73,25 +73,25 @@ $(function () {
                     }
                 },
                 { type: "text", name: "email", title: "Email", width: 100, filtering: false },
-                { 
-                    type: "checkbox", 
-                    name: "e_professor", 
-                    title: "É Professor", 
-                    width: 50, 
+                {
+                    type: "checkbox",
+                    name: "e_professor",
+                    title: "É Professor",
+                    width: 50,
                     filtering: true,
-                    filterTemplate: function() {
+                    filterTemplate: function () {
                         //return jsGrid.fields.checkbox.prototype.filterTemplate.call(this);
                         var controle, optBranco, optSim, optNao;
-                        
+
                         controle = this.filterControl = $('<select>');
                         optBranco = $('<option>').attr('value', '').text('').appendTo(controle);
                         optSim = $('<option>').attr('value', 'true').text('Sim').appendTo(controle);
                         optNao = $('<option>').attr('value', 'false').text('Não').appendTo(controle);
-                        
+
                         return controle;
 
                     },
-                    filterValue: function() {
+                    filterValue: function () {
                         return this.filterControl.find('option:selected').val();
                     }
                 },
@@ -112,9 +112,58 @@ $(function () {
             onItemUpdating: function (args) {
 
                 //console.log("onItemUpdating");
-              
+
                 var tel = args.item.telefone.replace(new RegExp(/\(|\)|\-|\s/, 'g'), '');
                 args.item.telefone = tel;
+
+            },
+
+            rowClick: function (args) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "dons/"
+                }).done(function (dons) {
+
+                    //window.dons = dons;
+                    $("<div>").jsGrid({
+                        fields: [
+                            { type: "select", name: "dom_id", title: "Nome", width: 50, items: dons, textField: "nome", valueField: "id", align: "left" },
+                            { type: "control", editButton: false }
+                        ],
+                        width: "90%",
+                        height: "auto",
+                        inserting: true,
+                        paging: true,
+                        pageSize: 10,
+                        autoload: true,
+                        controller: {
+                            loadData: function (filter) {
+                                return $.ajax({
+                                    type: "GET",
+                                    url: "pessoas/dons/?pessoa_id=" + args.item.id,
+                                    data: filter
+                                });
+                            },
+                            insertItem: function (item) {
+                                item.pessoa_id = args.item.id;
+                                return $.ajax({
+                                    type: "POST",
+                                    url: "pessoas/dons/",
+                                    data: item
+                                })
+                            },
+                            deleteItem: function (item) {
+                                return $.ajax({
+                                    type: "DELETE",
+                                    url: "pessoas/dons/",
+                                    data: item
+                                });
+                            }
+                        }
+                    }).dialog({ title: "Dons Espirituais", width: 500 });
+
+                });
 
             },
 
