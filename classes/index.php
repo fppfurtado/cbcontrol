@@ -5,6 +5,8 @@ include "../modelo/ClasseDAO.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb['db'], $configDb['usuario'], $configDb['senha']);
+$db->exec("set names utf8mb4");
+
 $classes = new ClasseDAO($db);
 
 $resultado = array();

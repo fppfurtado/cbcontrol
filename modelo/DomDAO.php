@@ -15,7 +15,7 @@ Class DomDAO implements iDAO {
     private function read($row) {
 
         $result = new Dom();
-
+        
         $result->id = $row["id"];
         $result->nome = $row["nome"];
         

@@ -5,6 +5,8 @@ include "../modelo/DomDAO.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb['db'], $configDb['usuario'], $configDb['senha']);
+$db->exec("set names utf8mb4");
+
 $dons = new DomDAO($db);
 
 $resultado = array();
@@ -46,5 +48,5 @@ switch($_SERVER['REQUEST_METHOD']) {
 
 }
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultado);

@@ -5,6 +5,8 @@ include "../modelo/PresencaDAO.php";
 
 $configDb = include "../db/config.php";
 $db = new PDO($configDb["db"], $configDb["usuario"], $configDb["senha"]);
+$db->exec("set names utf8mb4");
+
 $presencas = new PresencaDAO($db);
 
 $resultado = array();
