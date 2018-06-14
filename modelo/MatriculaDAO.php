@@ -79,6 +79,8 @@ Class MatriculaDAO implements iDAO {
             }
         }
 
+        $sql = $sql . ' ORDER by classe, pnome';
+
         $q = $this->db->prepare($sql);       
         
         if(!empty($pessoa_id)) {
