@@ -52,11 +52,9 @@ Class MatriculaDAO implements iDAO {
         $esta_cursando = $filter["esta_cursando"];
        // $discipulador = "%" . $filter["discipulador"] . "%";
 
-        $sql = "SELECT mm.id, mm.classe_id, mm.pessoa_id, mm.esta_cursando, mm.data_entrada, mm.data_saida, ROUND(COUNT(ma.id)/13*100,0) as frequencia, CONCAT(primeiro_nome, ' ', ultimo_nome) as nome
-        FROM marco_presenca mpr
-        INNER JOIN marco_aula ma ON mpr.aula_id = ma.id
-        INNER JOIN marco_matricula mm ON mpr.matricula_id = mm.id
-        INNER JOIN marco_classe mc ON ma.classe_id = mc.id
+        $sql = "SELECT mm.id, mm.pessoa_id, mm.classe_id, mm.esta_cursando, mm.data_entrada, mm.data_saida, CONCAT(mpe.primeiro_nome, ' ', mpe.ultimo_nome) as nome, ROUND(COUNT(mpr.aula_id)/13*100,0) as frequencia
+        FROM marco_matricula mm 
+        LEFT JOIN marco_presenca mpr ON mm.id = mpr.matricula_id
         INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id";
 
         $condicoes = [];
