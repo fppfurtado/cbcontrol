@@ -8,5 +8,6 @@ Class Matricula {
     public $esta_cursando;
     public $data_entrada;
     public $data_saida;
+    public $frequencia;
 
 }

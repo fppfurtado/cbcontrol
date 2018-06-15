@@ -17,8 +17,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
         $resultado = $presencas->getAll(
             array(
                 "aula_id" => isset($_GET["aula_id"]) ? $_GET["aula_id"] : null,
-                "pessoa_id" => isset($_GET["pessoa_id"]) ? $_GET["pessoa_id"] : null
-                
+                "matricula_id" => isset($_GET["matricula_id"]) ? $_GET["matricula_id"] : null                
             )
         );
         break;
@@ -27,7 +26,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
         $resultado = $presencas->insert(
             array(
                 "aula_id" => isset($_POST["aula_id"]) ? $_POST["aula_id"] : null,
-                "pessoa_id" => isset($_POST["pessoa_id"]) ? $_POST["pessoa_id"] : null                
+                "matricula_id" => isset($_POST["matricula_id"]) ? $_POST["matricula_id"] : null                
             )
         );
         break;
@@ -35,7 +34,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "DELETE":
         parse_str(file_get_contents("php://input"), $_DELETE);
         
-        $resultado = $presencas->remove(intval($_DELETE["pessoa_id"]));
+        $resultado = $presencas->remove(intval($_DELETE["matricula_id"]));
         break;         
 
 }

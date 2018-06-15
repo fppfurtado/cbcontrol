@@ -22,7 +22,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
                 "data_entrada_from" => isset($_GET["data_entrada"]["from"]) ? $_GET["data_entrada"]["from"] : null,
                 "data_entrada_to" => isset($_GET["data_entrada"]["to"]) ? $_GET["data_entrada"]["to"] : null,
                 "data_saida_from" => isset($_GET["data_saida"]["from"]) ? $_GET["data_saida"]["from"] : null,
-                "data_saida_to" => isset($_GET["data_saida"]["to"]) ? $_GET["data_saida"]["to"] : null
+                "data_saida_to" => isset($_GET["data_saida"]["to"]) ? $_GET["data_saida"]["to"] : null,
+                "frequencia" => isset($_GET["frequencia"]) ? $_GET["frequencia"] : null
             )
         );
         break;

@@ -11,6 +11,5 @@ Class Pessoa {
     public $email;
     public $e_professor;
     public $discipulador;
-    public $dons = [];
 
 }

@@ -21,6 +21,7 @@ Class AlunoDAO {
         $result->ultimo_nome = $row["unome"];
 
         $result->matricula = new Matricula();
+        $result->matricula->id = $row["id"];
         $result->matricula->classe_id = $row["classe_id"];
         $result->matricula->esta_cursando = $row["esta_cursando"] === "1" ? true : false;        
         
@@ -52,7 +53,7 @@ Class AlunoDAO {
         //$esta_cursando = $filter["esta_cursando"];
        // $discipulador = "%" . $filter["discipulador"] . "%";
 
-        $sql = "SELECT mm.pessoa_id, mp.primeiro_nome as pnome, mp.ultimo_nome as unome, mc.id as classe_id, mm.esta_cursando 
+        $sql = "SELECT mm.id, mm.pessoa_id, mp.primeiro_nome as pnome, mp.ultimo_nome as unome, mc.id as classe_id, mm.esta_cursando 
         FROM marco_matricula mm 
         INNER JOIN marco_pessoa mp ON mm.pessoa_id = mp.id
         INNER JOIN marco_classe mc ON mm.classe_id = mc.id

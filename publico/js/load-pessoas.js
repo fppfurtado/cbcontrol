@@ -47,7 +47,7 @@ $(function () {
                     filtering: false,
                     validate: "required",
                     // propriedade que define o coteúdo da célula em modo de exibição
-                    itemTemplate: function (value, item) {
+                    itemTemplate: function (value) {
                         //console.log('telefone:itemTemplate => ' + value);
                         return $("<span>")
                             .html(value)
@@ -63,7 +63,7 @@ $(function () {
                             .mask('(00) 00000-0000');
                     },
                     // propriedade que define o coteúdo da célula em modo de edição
-                    editTemplate: function (value, item) {
+                    editTemplate: function (value) {
                         //console.log('telefone:editTemplate => ' + value);
                         return jsGrid.fields.text.prototype.editTemplate
                             .call(this)

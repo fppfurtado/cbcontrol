@@ -66,6 +66,22 @@ $(function () {
                 },
                 { type: "date", name: "data_entrada", title: "Data Entrada", width: 50},
                 { type: "date", name: "data_saida", title: "Data Saída", width: 50},
+                { 
+                    type: "text", 
+                    name: "frequencia", 
+                    title: "Frequência", 
+                    width: 50, 
+                    align: "center", 
+                    readOnly: true,
+                    cellRenderer: function(value) {
+                        if(value >= 70) {
+                            return $("<td>").css("color","green").html(value+"%");
+                        } else {
+                            return $("<td>").css("color","red").html(value+"%");
+                        }
+                        
+                    }
+                 },
                 { type: "control" }
             ],
             

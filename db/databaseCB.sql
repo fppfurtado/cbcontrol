@@ -77,11 +77,11 @@ CREATE TABLE IF NOT EXISTS marco_doacao(
 
 CREATE TABLE IF NOT EXISTS marco_presenca(
 	aula_id MEDIUMINT NOT NULL,
-	pessoa_id SMALLINT NOT NULL,
-	CONSTRAINT PRIMARY KEY (aula_id, pessoa_id),
+	matricula_id SMALLINT NOT NULL,
+	CONSTRAINT PRIMARY KEY (aula_id, matricula_id),
 	CONSTRAINT FOREIGN KEY (aula_id) REFERENCES marco_aula (id)
 		ON DELETE CASCADE,
-	CONSTRAINT FOREIGN KEY (pessoa_id) REFERENCES marco_pessoa (id)
+	CONSTRAINT FOREIGN KEY (matricula_id) REFERENCES marco_matricula (id)
 		ON DELETE SET NULL
 );
 

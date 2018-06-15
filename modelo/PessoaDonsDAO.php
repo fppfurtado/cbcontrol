@@ -15,7 +15,6 @@ Class PessoaDonsDAO implements iDAO {
 
         $result = [
             "pessoa_id" => $row["pessoa_id"],
-        //    "pessoa_nome" => $row["pessoa_nome"],
             "dom_id" => $row["dom_id"],
             "dom_nome" => $row["nome"]
         ];

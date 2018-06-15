@@ -22,6 +22,7 @@ Class MatriculaDAO implements iDAO {
         $result->esta_cursando = $row["esta_cursando"] === "1" ? true : false;
         $result->data_entrada = $row["data_entrada"];
         $result->data_saida = $row["data_saida"];
+        $result->frequencia = $row["frequencia"];
         
         return $result;
 
@@ -51,25 +52,27 @@ Class MatriculaDAO implements iDAO {
         $esta_cursando = $filter["esta_cursando"];
        // $discipulador = "%" . $filter["discipulador"] . "%";
 
-        $sql = "SELECT mm.id, mp.id as pessoa_id, mp.primeiro_nome as pnome, mp.ultimo_nome as unome, mc.id as classe_id, mc.nome as classe, esta_cursando, data_entrada, data_saida 
-        FROM marco_matricula mm 
-        INNER JOIN marco_pessoa mp ON mm.pessoa_id = mp.id
-        INNER JOIN marco_classe mc ON mm.classe_id = mc.id";
+        $sql = "SELECT mm.id, mm.classe_id, mm.pessoa_id, mm.esta_cursando, mm.data_entrada, mm.data_saida, ROUND(COUNT(ma.id)/13*100,0) as frequencia, CONCAT(primeiro_nome, ' ', ultimo_nome) as nome
+        FROM marco_presenca mpr
+        INNER JOIN marco_aula ma ON mpr.aula_id = ma.id
+        INNER JOIN marco_matricula mm ON mpr.matricula_id = mm.id
+        INNER JOIN marco_classe mc ON ma.classe_id = mc.id
+        INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id";
 
         $condicoes = [];
         $contador = 0;
         
         if(!empty($pessoa_id)) {
             //$sql = $sql . " WHERE pessoa_id = :pid";
-            $condicoes[$contador++] = "pessoa_id = :pid";
+            $condicoes[$contador++] = "mm.pessoa_id = :pid";
         }
 
         if(!empty($classe_id)) {
-            $condicoes[$contador++] = "classe_id = :cid";
+            $condicoes[$contador++] = "mm.classe_id = :cid";
         }
 
         if(!empty($esta_cursando)) {
-            $condicoes[$contador++] = "esta_cursando = :ec";
+            $condicoes[$contador++] = "mm.esta_cursando = :ec";
         }
 
         if(sizeof($condicoes) > 0) {
@@ -79,7 +82,7 @@ Class MatriculaDAO implements iDAO {
             }
         }
 
-        $sql = $sql . ' ORDER by classe, pnome';
+        $sql = $sql . " GROUP BY mm.pessoa_id ORDER BY nome";
 
         $q = $this->db->prepare($sql);       
         

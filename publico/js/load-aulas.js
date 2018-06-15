@@ -62,11 +62,12 @@ $(function () {
 
                     for (var i = 0; i < alunos.length; i++) {
                         alunos[i].nome = alunos[i].primeiro_nome + " " + alunos[i].ultimo_nome;
+                        alunos[i].mat_id = alunos[i].matricula.id;
                     }
                     //window.alunos = alunos;
                     $("<div>").jsGrid({
                         fields: [
-                            { type: "select", name: "pessoa_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "id", align: "left" },
+                            { type: "select", name: "matricula_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "mat_id", align: "left" },
                             { type: "control", editButton: false }
                         ],
                         width: "90%",

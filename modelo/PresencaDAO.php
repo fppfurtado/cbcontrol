@@ -17,7 +17,7 @@ Class PresencaDAO implements iDAO {
         $result = new Presenca();
         
         $result->aula_id = $row["aula_id"];
-        $result->pessoa_id = $row["pessoa_id"];
+        $result->matricula_id = $row["matricula_id"];
         
         return $result;
 
@@ -26,11 +26,10 @@ Class PresencaDAO implements iDAO {
     public function getById($id) {
         
         $sql = "SELECT * FROM marco_presenca mpr
-        INNER JOIN marco_pessoa mpe ON mpr.pessoa_id = mpe.id
-        WHERE mpr.pessoa_id = :pid";
+        WHERE mpr.matricula_id = :mid";
 
         $q = $this->db->prepare($sql);
-        $q->bindParam(":pid", $id, PDO::PARAM_INT);
+        $q->bindParam(":mid", $id, PDO::PARAM_INT);
 
         if(!$q->execute()) {
             print_r($q->errorInfo());
@@ -46,8 +45,10 @@ Class PresencaDAO implements iDAO {
 
         $aula_id = $filter["aula_id"];
         
-        $sql = "SELECT aula_id, pessoa_id, CONCAT(primeiro_nome, ' ', ultimo_nome) as nome FROM marco_presenca pr
-        INNER JOIN marco_pessoa pe ON pr.pessoa_id = pe.id";
+        $sql = "SELECT aula_id, matricula_id, CONCAT(primeiro_nome, ' ', ultimo_nome) as nome 
+        FROM marco_presenca mpr
+        INNER JOIN marco_matricula mm ON mpr.matricula_id = mm.id
+        INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id";
         
         if(!empty($aula_id)) {
            $sql = $sql . " WHERE aula_id = :aid";
@@ -80,20 +81,20 @@ Class PresencaDAO implements iDAO {
     public function insert($data) {
         
         $sql = "INSERT INTO marco_presenca 
-        (aula_id, pessoa_id) 
+        (aula_id, matricula_id) 
         VALUES 
-        (:aid, :pid)";
+        (:aid, :mid)";
 
         $q = $this->db->prepare($sql);
         $q->bindParam(":aid", $data["aula_id"], PDO::PARAM_INT);
-        $q->bindParam(":pid", $data["pessoa_id"], PDO::PARAM_INT);
+        $q->bindParam(":mid", $data["matricula_id"], PDO::PARAM_INT);
         
         if(!$q->execute()) {
             print_r($q->errorInfo());
             return;
         }
         
-        return $this->getById($data["pessoa_id"]);
+        return $this->getById($data["matricula_id"]);
 
     }
 
@@ -102,12 +103,12 @@ Class PresencaDAO implements iDAO {
         $sql = "UPDATE marco_presenca 
         SET 
         aula_id = :aid, 
-        pessoa_id = :pid
+        pessoa_id = :mid
         WHERE id = :id";
 
         $q = $this->db->prepare($sql);
         $q->bindParam(":aid", $data["aula_id"], PDO::PARAM_INT);
-        $q->bindParam(":pid", $data["pessoa_id"], PDO::PARAM_INT);
+        $q->bindParam(":mid", $data["matricula_id"], PDO::PARAM_INT);
         
         if(!$q->execute()) {
             print_r($q->errorInfo());
@@ -118,9 +119,9 @@ Class PresencaDAO implements iDAO {
 
     public function remove($id) {
         $sql = "DELETE FROM marco_presenca 
-        WHERE pessoa_id = :pid";
+        WHERE matricula_id = :mid";
         $q = $this->db->prepare($sql);
-        $q->bindParam(":pid", $id, PDO::PARAM_INT);
+        $q->bindParam(":mid", $id, PDO::PARAM_INT);
         
         if(!$q->execute()) {
             print_r($q->errorInfo());
