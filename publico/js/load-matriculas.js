@@ -111,7 +111,7 @@ $(function () {
                     });
                 },
                 // Requisição do tipo POST ao servidor, inserindo a matriculas contida no objeto "item".
-                insertItem: function (item) {
+                insertItem: function (item) {debugger;
                     return $.ajax({
                         type: "POST",
                         url: "matriculas/",

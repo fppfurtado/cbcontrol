@@ -80,7 +80,7 @@ Class MatriculaDAO implements iDAO {
             }
         }
 
-        $sql = $sql . " GROUP BY mm.pessoa_id ORDER BY nome";
+        $sql = $sql . " GROUP BY mm.classe_id, mm.pessoa_id ORDER BY nome";
 
         $q = $this->db->prepare($sql);       
         
