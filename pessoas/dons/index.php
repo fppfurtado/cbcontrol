@@ -16,7 +16,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "GET":
         $resultado = $pessoa_dons->getAll(
             array(
-                "pessoa_id" => isset($_GET["pessoa_id"]) ? $_GET["pessoa_id"] : null,
+                "pessoa_id" => isset($_GET["pessoa"]["id"]) ? $_GET["pessoa"]["id"] : null,
                 "dom_id" => isset($_GET["dom_id"]) ? $_GET["dom_id"] : null                
             )
         );
@@ -25,7 +25,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "POST":
         $resultado = $pessoa_dons->insert(
             array(
-                "pessoa_id" => isset($_POST["pessoa_id"]) ? $_POST["pessoa_id"] : null,
+                "pessoa_id" => isset($_POST["pessoa"]["id"]) ? $_POST["pessoa"]["id"] : null,
                 "dom_id" => isset($_POST["dom_id"]) ? $_POST["dom_id"] : null
             )
         );

@@ -141,12 +141,12 @@ $(function () {
                             loadData: function (filter) {
                                 return $.ajax({
                                     type: "GET",
-                                    url: "pessoas/dons/?pessoa_id=" + args.item.id,
+                                    url: "pessoas/dons/?pessoa[id]=" + args.item.id,
                                     data: filter
                                 });
                             },
                             insertItem: function (item) {
-                                item.pessoa_id = args.item.id;
+                                item.pessoa = { id: args.item.id };
                                 return $.ajax({
                                     type: "POST",
                                     url: "pessoas/dons/",
