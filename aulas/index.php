@@ -18,8 +18,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
             array(
                 "data_from" => isset($_GET["data"]["from"]) ? $_GET["data"]["from"] : null,
                 "data_to" => isset($_GET["data"]["to"]) ? $_GET["data"]["to"] : null,
-                "classe_id" => isset($_GET["classe_id"]) ? $_GET["classe_id"] : null,
-                "professor_id" => isset($_GET["professor_id"]) ? $_GET["professor_id"] : null,                
+                "classe_id" => isset($_GET["classe"]["id"]) ? $_GET["classe"]["id"] : null,
+                "professor_id" => isset($_GET["professor"]["id"]) ? $_GET["professor"]["id"] : null,                
                 "num_licao" => isset($_GET["num_licao"]) ? $_GET["num_licao"] : null,
                 "estudo_licao" => isset($_GET["estudo_licao"]) ? $_GET["estudo_licao"] : null,
                 "pequeno_grupo" => isset($_GET["pequeno_grupo"]) ? $_GET["pequeno_grupo"] : null,
@@ -33,8 +33,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
         $resultado = $aulas->insert(
             array(
                 "data" => isset($_POST["data"]) ? $_POST["data"] : null,
-                "classe_id" => isset($_POST["classe_id"]) ? $_POST["classe_id"] : null,
-                "professor_id" => isset($_POST["professor_id"]) ? $_POST["professor_id"] : null,                
+                "classe_id" => isset($_POST["classe"]["id"]) ? $_POST["classe"]["id"] : null,
+                "professor_id" => isset($_POST["professor"]["id"]) ? $_POST["professor"]["id"] : null,                
                 "num_licao" => isset($_POST["num_licao"]) ? $_POST["num_licao"] : null,
                 "estudo_licao" => isset($_POST["estudo_licao"]) ? $_POST["estudo_licao"] : null,
                 "pequeno_grupo" => isset($_POST["pequeno_grupo"]) ? $_POST["pequeno_grupo"] : null,
@@ -51,8 +51,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
             array(
                 "id" => isset($_PUT["id"]) ? $_PUT["id"] : null,
                 "data" => isset($_PUT["data"]) ? $_PUT["data"] : null,
-                "classe_id" => isset($_PUT["classe_id"]) ? $_PUT["classe_id"] : null,
-                "professor_id" => isset($_PUT["professor_id"]) ? $_PUT["professor_id"] : null,                
+                "classe_id" => isset($_PUT["classe"]["id"]) ? $_PUT["classe"]["id"] : null,
+                "professor_id" => isset($_PUT["professor"]["id"]) ? $_PUT["professor"]["id"] : null,                
                 "num_licao" => isset($_PUT["num_licao"]) ? $_PUT["num_licao"] : null,
                 "estudo_licao" => isset($_PUT["estudo_licao"]) ? $_PUT["estudo_licao"] : null,
                 "pequeno_grupo" => isset($_PUT["pequeno_grupo"]) ? $_PUT["pequeno_grupo"] : null,

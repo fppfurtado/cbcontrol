@@ -59,8 +59,16 @@ class AulaDAO implements iDAO
         $classe_id = $filter["classe_id"];
         // $discipulador = "%" . $filter["discipulador"] . "%";
 
-        $sql = "SELECT ma.id, ma.data, ma.professor_id as professor_id, ma.classe_id as classe_id,
-        ma.num_licao as num_licao, estudo_licao, pequeno_grupo, estudo_biblico, ativ_missionarias
+        $sql = "SELECT 
+        ma.id, 
+        ma.data, 
+        ma.professor_id as professor_id, 
+        ma.classe_id as classe_id,
+        ma.num_licao as num_licao, 
+        estudo_licao, 
+        pequeno_grupo, 
+        estudo_biblico, 
+        ativ_missionarias
         FROM marco_aula ma 
         INNER JOIN marco_pessoa mp ON ma.professor_id = mp.id
         INNER JOIN marco_classe mc ON ma.classe_id = mc.id";
@@ -85,7 +93,10 @@ class AulaDAO implements iDAO
             $condicoes[$contador++] = "classe_id = :cid";
         }
 
-        if (sizeof($condicoes) > 0) {
+        if(sizeof($condicoes) === 1) {
+            $sql = $sql . " WHERE ";
+            $sql = $sql . $condicoes[0];           
+        } elseif(sizeof($condicoes) > 1) {
             $sql = $sql . " WHERE ";
             foreach ($condicoes as $c) {
                 $sql = $sql . "AND " . $c;
