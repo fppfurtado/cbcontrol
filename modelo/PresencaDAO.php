@@ -1,7 +1,7 @@
 <?php
 
-include "Presenca.php";
-include "iDAO.php";
+require_once "Presenca.php";
+require_once "iDAO.php";
 
 Class PresencaDAO implements iDAO {
 
@@ -15,9 +15,10 @@ Class PresencaDAO implements iDAO {
     private function read($row) {
 
         $result = new Presenca();
-        
-        $result->aula_id = $row["aula_id"];
-        $result->matricula_id = $row["matricula_id"];
+
+        $result->aula->id = $row["aula_id"];
+        $result->matricula->id = $row["matricula_id"];
+        $result->matricula->classe->id = $row["classe_id"];
         
         return $result;
 
@@ -25,7 +26,14 @@ Class PresencaDAO implements iDAO {
 
     public function getById($id) {
         
-        $sql = "SELECT * FROM marco_presenca mpr
+        $sql = "SELECT
+        mpr.aula_id,
+        mpr.matricula_id,
+        mm.classe_id
+        FROM marco_presenca mpr
+        INNER JOIN marco_matricula mm ON mpr.matricula_id = mm.id
+        INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id
+        INNER JOIN marco_classe mc ON mm.classe_id = mc.id
         WHERE mpr.matricula_id = :mid";
 
         $q = $this->db->prepare($sql);
@@ -45,10 +53,15 @@ Class PresencaDAO implements iDAO {
 
         $aula_id = $filter["aula_id"];
         
-        $sql = "SELECT aula_id, matricula_id, CONCAT(primeiro_nome, ' ', ultimo_nome) as nome 
+        $sql = "SELECT 
+        mpr.aula_id,
+        mpr.matricula_id, 
+        mm.classe_id,
+        CONCAT(primeiro_nome, ' ', ultimo_nome) as nome 
         FROM marco_presenca mpr
         INNER JOIN marco_matricula mm ON mpr.matricula_id = mm.id
-        INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id";
+        INNER JOIN marco_pessoa mpe ON mm.pessoa_id = mpe.id
+        INNER JOIN marco_classe mc ON mm.classe_id = mc.id";
         
         if(!empty($aula_id)) {
            $sql = $sql . " WHERE aula_id = :aid";

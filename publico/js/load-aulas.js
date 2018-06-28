@@ -41,8 +41,8 @@ $(function () {
             // Propriedade que contém um vetor com objetos que representam os campos da tabela
             fields: [
                 { type: "date", name: "data", title: "Data", width: 50 },
-                { type: "select", name: "classe_id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome", validate: "required" },
-                { type: "select", name: "professor_id", title: "Professor", width: 70, filtering: true, items: professores, valueField: "id", textField: "nome", validate: "required" },
+                { type: "select", name: "classe.id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome", validate: "required" },
+                { type: "select", name: "professor.id", title: "Professor", width: 70, filtering: true, items: professores, valueField: "id", textField: "nome", validate: "required" },
                 { type: "number", name: "num_licao", title: "Número Lição", width: 40, align: "center" },
                 { type: "number", name: "estudo_licao", title: "Estudo Lição", width: 40, align: "center" },
                 { type: "number", name: "pequeno_grupo", title: "Pequeno Grupo", width: 40, align: "center" },
@@ -58,16 +58,33 @@ $(function () {
                     url: "alunos/"
                 }).done(function (alunos) {
 
-                    //var alunos = [];
-
                     for (var i = 0; i < alunos.length; i++) {
-                        alunos[i].nome = alunos[i].primeiro_nome + " " + alunos[i].ultimo_nome;
-                        alunos[i].mat_id = alunos[i].matricula.id;
+                        alunos[i].nome = alunos[i].pessoa.primeiro_nome + " " + alunos[i].pessoa.ultimo_nome;
+                        //alunos[i].mat_id = alunos[i].matricula.id;
                     }
                     //window.alunos = alunos;
                     $("<div>").jsGrid({
                         fields: [
-                            { type: "select", name: "matricula_id", title: "Nome", width: 50, items: alunos, textField: "nome", valueField: "mat_id", align: "left" },
+                            { 
+                                type: "select", 
+                                name: "matricula.id", 
+                                title: "Nome", 
+                                width: 50, 
+                                items: alunos, 
+                                textField: "nome", 
+                                valueField: "id", 
+                                align: "left", 
+                                validate: "required",
+                                insertTemplate: function() {
+                                    
+                                    this.items = $.grep(this.items, function(pr) {
+                                        return pr.classe.id === args.item.classe.id;
+                                    });
+
+                                    return jsGrid.fields.select.prototype.insertTemplate.call(this);
+
+                                }
+                            },
                             { type: "control", editButton: false }
                         ],
                         width: "90%",
@@ -80,12 +97,12 @@ $(function () {
                             loadData: function (filter) {
                                 return $.ajax({
                                     type: "GET",
-                                    url: "presencas/?aula_id=" + args.item.id,
+                                    url: "presencas/?aula[id]=" + args.item.id,
                                     data: filter
                                 });
                             },
                             insertItem: function (item) {
-                                item.aula_id = args.item.id;
+                                item.aula = { id: args.item.id };
                                 return $.ajax({
                                     type: "POST",
                                     url: "presencas/",

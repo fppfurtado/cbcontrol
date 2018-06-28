@@ -40,8 +40,8 @@ $(function () {
 
             // Propriedade que contém um vetor com objetos que representam os campos da tabela
             fields: [
-                { type: "select", name: "classe_id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome",validate: "required", align: "center" },
-                { type: "select", name: "pessoa_id", title: "Nome", width: 70, filtering: true, items: alunos, valueField: "id", textField: "nome", validate: "required", align: "left" },
+                { type: "select", name: "classe.id", title: "Classe", width: 70, filtering: true, items: classes[0], valueField: "id", textField: "nome",validate: "required", align: "center" },
+                { type: "select", name: "pessoa.id", title: "Nome", width: 70, filtering: true, items: alunos, valueField: "id", textField: "nome", validate: "required", align: "left" },
                 { 
                     type: "checkbox", 
                     name: "esta_cursando", 
@@ -111,7 +111,7 @@ $(function () {
                     });
                 },
                 // Requisição do tipo POST ao servidor, inserindo a matriculas contida no objeto "item".
-                insertItem: function (item) {debugger;
+                insertItem: function (item) {
                     return $.ajax({
                         type: "POST",
                         url: "matriculas/",

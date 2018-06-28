@@ -1,7 +1,7 @@
 <?php
 
-include "Dom.php";
-include "iDAO.php";
+require_once "Dom.php";
+require_once "iDAO.php";
 
 Class DomDAO implements iDAO {
 

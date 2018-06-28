@@ -1,9 +1,7 @@
 <?php
 
-include "Aula.php";
-include "Pessoa.php";
-include "Classe.php";
-include "iDAO.php";
+require_once "Aula.php";
+require_once "iDAO.php";
 
 class AulaDAO implements iDAO
 {
@@ -22,8 +20,8 @@ class AulaDAO implements iDAO
 
         $result->id = $row["id"];
         $result->data = $row["data"];
-        $result->classe_id = $row["classe_id"];
-        $result->professor_id = $row["professor_id"];
+        $result->classe->id = $row["classe_id"];
+        $result->professor->id = $row["professor_id"];
         $result->num_licao = $row["num_licao"];
         $result->estudo_licao = $row["estudo_licao"];
         $result->pequeno_grupo = $row["pequeno_grupo"];

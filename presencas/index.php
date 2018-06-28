@@ -16,8 +16,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "GET":
         $resultado = $presencas->getAll(
             array(
-                "aula_id" => isset($_GET["aula_id"]) ? $_GET["aula_id"] : null,
-                "matricula_id" => isset($_GET["matricula_id"]) ? $_GET["matricula_id"] : null                
+                "aula_id" => isset($_GET["aula"]["id"]) ? $_GET["aula"]["id"] : null,
+                "matricula_id" => isset($_GET["matricula"]["id"]) ? $_GET["matricula"]["id"] : null                
             )
         );
         break;
@@ -25,8 +25,8 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "POST":
         $resultado = $presencas->insert(
             array(
-                "aula_id" => isset($_POST["aula_id"]) ? $_POST["aula_id"] : null,
-                "matricula_id" => isset($_POST["matricula_id"]) ? $_POST["matricula_id"] : null                
+                "aula_id" => isset($_POST["aula"]["id"]) ? $_POST["aula"]["id"] : null,
+                "matricula_id" => isset($_POST["matricula"]["id"]) ? $_POST["matricula"]["id"] : null                
             )
         );
         break;
@@ -34,7 +34,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case "DELETE":
         parse_str(file_get_contents("php://input"), $_DELETE);
         
-        $resultado = $presencas->remove(intval($_DELETE["matricula_id"]));
+        $resultado = $presencas->remove(intval($_DELETE["matricula"]["id"]));
         break;         
 
 }

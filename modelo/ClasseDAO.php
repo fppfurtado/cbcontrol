@@ -1,7 +1,7 @@
 <?php
 
-include "Classe.php";
-include "iDAO.php";
+require_once "Classe.php";
+require_once "iDAO.php";
 
 Class ClasseDAO implements iDAO {
 

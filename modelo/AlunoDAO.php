@@ -1,8 +1,7 @@
 <?php
 
-include "Aluno.php";
-include "Matricula.php";
-include "iDAO.php";
+require_once "Matricula.php";
+require_once "iDAO.php";
 
 Class AlunoDAO {
 
@@ -15,15 +14,15 @@ Class AlunoDAO {
 
     private function read($row) {
 
-        $result = new Aluno();
-        $result->id = $row["pessoa_id"];
-        $result->primeiro_nome = $row["pnome"];
-        $result->ultimo_nome = $row["unome"];
+        $result = new Matricula();
 
-        $result->matricula = new Matricula();
-        $result->matricula->id = $row["id"];
-        $result->matricula->classe_id = $row["classe_id"];
-        $result->matricula->esta_cursando = $row["esta_cursando"] === "1" ? true : false;        
+        $result->id = $row["id"];
+        $result->classe->id = $row["classe_id"];
+        $result->classe->nome = $row["classe_nome"];
+        $result->pessoa->id = $row["pessoa_id"];
+        $result->pessoa->primeiro_nome = $row["pnome"];
+        $result->pessoa->ultimo_nome = $row["unome"];
+        $result->esta_cursando = $row["esta_cursando"] === "1" ? true : false;        
         
         return $result;
 
@@ -53,7 +52,14 @@ Class AlunoDAO {
         //$esta_cursando = $filter["esta_cursando"];
        // $discipulador = "%" . $filter["discipulador"] . "%";
 
-        $sql = "SELECT mm.id, mm.pessoa_id, mp.primeiro_nome as pnome, mp.ultimo_nome as unome, mc.id as classe_id, mm.esta_cursando 
+        $sql = "SELECT 
+        mm.id,
+        mm.pessoa_id, 
+        mp.primeiro_nome as pnome, 
+        mp.ultimo_nome as unome, 
+        mc.id as classe_id,
+        mc.nome as classe_nome, 
+        mm.esta_cursando 
         FROM marco_matricula mm 
         INNER JOIN marco_pessoa mp ON mm.pessoa_id = mp.id
         INNER JOIN marco_classe mc ON mm.classe_id = mc.id

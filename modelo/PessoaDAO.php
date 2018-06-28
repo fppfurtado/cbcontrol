@@ -1,7 +1,7 @@
 <?php
 
-include "Pessoa.php";
-include "iDAO.php";
+require_once "Pessoa.php";
+require_once "iDAO.php";
 
 Class PessoaDAO implements iDAO {
 

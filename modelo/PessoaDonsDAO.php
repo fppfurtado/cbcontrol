@@ -1,6 +1,6 @@
 <?php
 
-include "iDAO.php";
+require_once "iDAO.php";
 
 Class PessoaDonsDAO implements iDAO {
 
