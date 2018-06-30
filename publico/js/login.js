@@ -1,13 +1,13 @@
 function loginClickHandler(event) {
 
-    var uname = document.getElementsByName("uname")[0];
+    //var uname = document.getElementsByName("uname")[0];
     var psw = document.getElementsByName("psw")[0];
     
-    if(uname.value === "discipuladomarco" && psw.value === "iasd3590") {
-        console.log("logado!");
+    if(psw.value === "iasd3590") {
+        window.alert("Bem vindo!");
         document.getElementsByClassName("modal")[0].style.display = 'none';
     } else {
-        console.log(" acesso não permitido!");
+        window.alert("Senha incorreta!");
     }
 
 }
