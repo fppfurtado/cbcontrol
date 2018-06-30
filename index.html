@@ -13,7 +13,7 @@
     <link href="publico/css/style.css" rel="stylesheet" />
     <script src="publico/js/libs/jquery.min.js"></script>
     <script src="publico/js/libs/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="publico/js/libs/jsgrid.min.js"></script>    
+    <script src="publico/js/libs/jsgrid.min.js"></script>
     <script src="publico/JS/libs/jquery.mask.min.js"></script>
     <script src="publico/js/datefield.js"></script>
 </head>
@@ -24,44 +24,52 @@
     </header>
 
     <ul class="menu">
-        <li><a id="membros" href="#membros" onclick="clickHandler(event);">membros</a></li>
-        <li><a id="matriculas" href="#matriculas" onclick="clickHandler(event);">matriculas</a></li>
-        <li><a id="aulas" href="#aulas" onclick="clickHandler(event);">aulas</a></li>         
+        <li>
+            <a id="membros" href="#membros" onclick="clickHandler(event);">membros</a>
+        </li>
+        <li>
+            <a id="matriculas" href="#matriculas" onclick="clickHandler(event);">matriculas</a>
+        </li>
+        <li>
+            <a id="aulas" href="#aulas" onclick="clickHandler(event);">aulas</a>
+        </li>
         <!--<li><a id="dons" href="#dons" onclick="clickHandler(event);">dons espirituais</a></li>-->
-    </ul>    
+    </ul>
 
     <br>
 
     <div id="jsGrid"></div>
 
     <div id="id01" class="modal">
-  
-        <form name="formulario" class="modal-content animate">
-          <div class="imgcontainer">
-            <img src="http://iasdmarco.org.br/wp-content/uploads/2018/03/cropped-circular.png" alt="Avatar" class="avatar">
-          </div>
-      
-          <div class="container">
-            
-            <label for="psw"><b>Acesso Restrito</b></label>
-            <input type="password" placeholder="Entre com a senha" name="psw" required>
-              
-            <button type="button" onclick="loginClickHandler(event);">Login</button>
-            
-          </div>
-      
-        </form>
-      </div>
 
-      <script src="publico/js/login.js"></script>
+        <form name="formulario" class="modal-content animate">
+            <div class="imgcontainer">
+                <img src="http://iasdmarco.org.br/wp-content/uploads/2018/03/cropped-circular.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+
+                <label for="psw">
+                    <b>Acesso Restrito</b>
+                </label>
+                <input type="password" placeholder="Entre com a senha" name="psw" required>
+
+                <button type="button" onclick="loginClickHandler(event);">Login</button>
+
+            </div>
+
+        </form>
+    </div>
+
+    <script src="publico/js/login.js"></script>
 
     <script>
-        
+
         function clickHandler(event) {
 
             var elemento = event.target;
             var id = elemento.getAttribute("id");
-            
+
             var scriptJS = document.createElement("script");
 
             switch (id) {
@@ -82,12 +90,12 @@
                     scriptJS.src = "publico/js/load-aulas.js"
                     break;
             }
-            
+
             document.body.appendChild(scriptJS);
 
         };
 
-    </script>    
+    </script>
 </body>
 
 </html>
